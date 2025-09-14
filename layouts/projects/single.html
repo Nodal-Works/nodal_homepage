@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article class="project-detail" style="max-width:700px;margin:2rem auto;padding:2rem;background:#fff;border-radius:8px;box-shadow:0 2px 8px #0001;">
+  <h1>{{ .Title }}</h1>
+  {{ with .Params.image }}
+  <img src="{{ . }}" alt="{{ $.Title }}" style="width:100%;max-height:350px;object-fit:cover;margin-bottom:1rem;">
+  {{ end }}
+  {{ with .Params.description }}
+  <p style="font-size:1.1rem;color:#555;">{{ . }}</p>
+  {{ end }}
+  <div class="project-content" style="margin-top:1.5rem;">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}
