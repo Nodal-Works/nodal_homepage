@@ -1,3 +1,7 @@
+
+[caches]
+	[caches.images]
+		dir = ':cacheDir/images'
 ######################## default configuration ####################
 # The base URL of your site (required). This will be prepended to all relative URLs.
 baseURL = "/"
@@ -71,7 +75,7 @@ resampleFilter = "Lanczos"
 ############################ Caches ##############################
 [caches]
 [caches.images]
-dir = ":resourceDir/_gen"
+dir = ":cacheDir/images"
 maxAge = "720h"
 
 [caches.assets]
