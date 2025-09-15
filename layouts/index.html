@@ -1,0 +1,205 @@
+{{ define "main" }}
+  <!-- Banner -->
+  {{ with .Params.banner }}
+  <!-- full-viewport hero: use flex to center content vertically and horizontally -->
+  <section class="section flex items-center" style="min-height:100vh;">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="lg:col-7 md:col-9 mb-8 text-center">
+          <!-- Render banner title if present -->
+          {{ if .title }}
+            <h1 class="mb-4 text-h3 lg:text-h1">{{ .title }}</h1>
+          {{ end }}
+
+          <!-- Render banner.content so shortcodes (like logo-nodal) execute -->
+          {{ if .content }}
+            <!-- enforce a large CSS variable so the logo-nodal renders big and visible -->
+            <div class="mb-8" style="--size:220px;">{{ $.RenderString .content }}</div>
+          {{ end }}
+
+          <!-- Button handling -->
+          {{ with .button }}
+            {{ if .enable }}
+              <a class="btn btn-primary" href="{{ .link }}">{{ .label }}</a>
+            {{ end }}
+          {{ end }}
+          </div>
+          <div class="col-12">
+            {{ if .image }}
+              {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px]" "DisplayXL" "800x" ) }}
+            {{ end }}
+          </div>
+        </div>
+      </div>
+  </section>
+  {{ end }}
+  <!-- /Banner -->
+
+  {{/* Defer to theme's rest of homepage by including the original template for subsequent sections if needed. Since we are overriding, copy of remaining sections from theme retained below. */}}
+
+  <!-- Vision & Mission -->
+  <section class="section pt-10 pb-6 bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10 md:col-12 mb-8">
+          <h2 class="mb-4 text-center">Vision</h2>
+          <p class="mb-6 text-lg text-center">As long as decision-makers approach sustainability with the right intentions, their technical competence should not be what holds them back. Our vision is to contribute to people-centred cities where urban policies are measurably more equitable and sustainable, and where residents experience tangible improvements in daily life – from accessibility and air quality to fairer energy costs.</p>
+          <h2 class="mb-4 text-center">Mission</h2>
+          <p class="mb-6 text-lg text-center">We work with municipalities and organisations committed to sustainability by strengthening their use of data and evidence in decision-making. Our approach combines quantitative modelling, simulation, and strategic planning with qualitative insights to ensure policies are grounded in lived realities. In doing so, we not only provide answers but also help our clients discover better questions.</p>
+          <h2 class="mb-4 text-center">Values</h2>
+          <p class="mb-6 text-lg text-center">Equity is central to our work. We recognise the imbalance of power between those making decisions and those affected by them, and we seek to bridge this gap by advocating for residents and users of cities through evidence-based methods.</p>
+          <h2 class="mb-4 text-center">Goals</h2>
+          <p class="mb-6 text-lg text-center">In the first year, we aim to demonstrate value across three verticals: by building tools and simulations, by advising on strategies such as municipal GIS digitisation, and by enabling organisations through training and capacity-building. We will engage with municipalities, property owners, real estate developers, and universities, while actively positioning ourselves as a small and agile SME partner in Swedish and European research projects.</p>
+          <p class="mb-6 text-lg text-center">Our medium-term objective is to deepen our role within municipalities by developing recurring services. These may include pre-processed analysis layers for GIS data and platforms that help departments understand and utilise their information more effectively. By building strong relationships with municipalities and their data, we can bring together universities, startups, and other partners into consortia where applied research directly benefits practice. We are prepared not only to participate in such projects but also to lead their formulation and, when needed, coordinate them to ensure that they deliver genuine impact rather than outcomes limited to academic publishing.</p>
+          <p class="mb-6 text-lg text-center">Over the next five years, we will establish a base in Sweden and occasionally expand to projects in the UK. In the long term, we aspire to expand our impact internationally, starting with Argentina, Egypt, and India, where we can apply lessons learned in Sweden to new contexts. A part of this ambition is to contribute to knowledge transfer through education, whether by teaching or supporting improvements in universities, ensuring that the expertise we gain is shared more widely.</p>
+          <h2 class="mb-4 text-center">Our Edge</h2>
+          <p class="mb-6 text-lg text-center">We bring together the experience of working in both academia and industry. Often, complex projects have relied on us as the experts who can bridge the two worlds and deliver results. Large consultancies are valuable but usually heavy and impersonal. Our strength lies in being lean, personal, and responsive, while operating with the competence and reach of a much larger organisation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jonathan's Vision & Product Roadmap -->
+  <section class="section pt-10 pb-6">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10 md:col-12 mb-8">
+          <h2 class="mb-4 text-center">Urban Intelligence & Product Vision</h2>
+          <p class="mb-6 text-lg text-center">To harness the power of data, forecasting models, and advanced visualization tools to transform urban decision-making. To empower policymakers, city planners, architects, and businesses to address the complex challenges of modern cities with precision, foresight, and creativity. By analysing spatial, territorial, and socio-economic data, we provide actionable insights that support resilient, sustainable, and inclusive urban development.</p>
+          <p class="mb-6 text-lg text-center">To bridge the gap between data and action—turning complex datasets into clear, practical guidance that informs policies, planning, and investments. By enabling evidence-based decisions, we help create cities that are environmentally responsible, socially equitable, and adaptable to the challenges of climate change, population growth, and technological transformation.</p>
+          <p class="mb-6 text-lg text-center">Through collaboration with stakeholders across government, private sector, and civil society, we strive to elevate urban planning standards, inspire innovative solutions, and ultimately build cities that thrive economically, socially, and environmentally.</p>
+          <p class="mb-6 text-lg text-center">In the long term, to evolve from a consulting-focused agency into a full-scale urban intelligence platform by developing proprietary digital and IoT products. These products will allow cities, policymakers, urban planners, architects, and businesses to collect, integrate, and analyse real-time urban data, providing a continuous, actionable understanding of the built environment.</p>
+          <p class="mb-6 text-lg text-center">Our digital tools and IoT solutions will include sensors, monitoring systems, and cloud-based analytical platforms that track and visualize urban dynamics—such as mobility flows, energy consumption, environmental quality, and infrastructure performance. By combining these products with advanced forecasting models, AI-driven analytics, and interactive visualizations, we aim to provide a complete ecosystem of analytical tools that clients can use to make smarter, data-driven decisions.</p>
+          <p class="mb-6 text-lg text-center">Owning and maintaining these solutions will allow us to deliver an end-to-end service: from data collection to insights generation to implementation support. This approach ensures our clients always have access to the most accurate, up-to-date, and actionable information to design resilient, sustainable, and people-cantered cities. Over time, these products will not only enhance our consulting services but also create scalable revenue streams, strengthen our technological leadership, and establish us as a key player in shaping the future of urban intelligence.</p>
+          <p class="mb-6 text-lg text-center">Eventually contribute to knowledge generation with partnerships with Universities and NGOs. And aiming high, become a think tank in urban challenges.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Offer -->
+  <section class="section pt-10 pb-6 bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10 md:col-12 mb-8">
+          <h2 class="mb-4 text-center">What We Offer</h2>
+          <ul class="text-lg list-disc pl-8">
+            <li>Data insights for urban planners</li>
+            <li>Data science trainings with specialization in geographic information modelling</li>
+            <li>Surveys and market research</li>
+            <li>Mobility, circular economy, and positive energy districts</li>
+            <li>We have a data parroch</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  {{ range $i, $e:= .Params.features }}
+    <section class="section-sm {{ if (modBool $i 2) }}bg-gradient{{ end }}">
+      <div class="container">
+        <div class="row items-center justify-between">
+          <div
+            class="mb:md-0 {{ if not (modBool $i 2) }}
+              md:order-2
+            {{ end }} md:col-5 mb-6">
+            {{ partial "image" (dict "Src" .image "Alt" "feature image" "DisplayXL" "520x" "DisplayLG" "425x" "DisplayMD" "360x") }}
+          </div>
+          <div
+            class="{{ if not (modBool $i 2) }}
+              md:order-1
+            {{ end }} md:col-7 lg:col-6">
+            <h2 class="mb-4">
+              {{ .title | markdownify }}
+            </h2>
+            <p class="mb-8 text-lg">
+              {{ .content | markdownify }}
+            </p>
+            <ul>
+              {{ range .bulletpoints }}
+                <li class="relative mb-4 pl-6">
+                  <i class="fa fa-check absolute left-0 top-1.5"></i>
+                  {{ . | markdownify }}
+                </li>
+              {{ end }}
+            </ul>
+            {{ with .button }}
+              {{ if .enable }}
+                <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
+                  {{ .label }}
+                  <i class="fa fa-arrow-right pl-2"></i>
+                </a>
+              {{ end }}
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Features -->
+
+  <!-- Testimonials -->
+  {{ with site.GetPage "sections/testimonial" }}
+    {{ if .Params.enable }}
+      <section class="section">
+        <div class="container">
+          <div class="row">
+            <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
+              <h2 class="mb-4">
+                {{ .Title | markdownify }}
+              </h2>
+              <p>
+                {{ .Params.description | markdownify }}
+              </p>
+            </div>
+            <div class="col-12">
+              <div class="swiper testimonial-slider">
+                <div class="swiper-wrapper">
+                  {{ range .Params.testimonials }}
+                    <div class="swiper-slide">
+                      <div
+                        class="bg-light dark:bg-darkmode-light rounded-lg px-7 py-10">
+                        <div class="text-text-dark dark:text-white">
+                          <svg
+                            width="33"
+                            height="20"
+                            viewBox="0 0 33 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M1.28375 19.41L0.79375 18.64C1.21375 17.0067 1.75042 15.07 2.40375 12.83C3.05708 10.5433 3.75708 8.28 4.50375 6.04C5.29708 3.75333 6.06708 1.77 6.81375 0.0899959H15.3538C14.9338 2.09666 14.4904 4.26667 14.0238 6.6C13.5571 8.88666 13.1371 11.15 12.7638 13.39C12.4371 15.5833 12.1571 17.59 11.9238 19.41H1.28375ZM31.69 0.0899959L32.18 0.859998C31.76 2.54 31.2233 4.5 30.57 6.74C29.9167 8.98 29.2167 11.2433 28.47 13.53C27.7233 15.77 26.9533 17.73 26.16 19.41H17.69C18.0167 17.9167 18.3433 16.33 18.67 14.65C18.9967 12.9233 19.3 11.22 19.58 9.54C19.9067 7.81333 20.1867 6.15667 20.42 4.57C20.7 2.93666 20.91 1.44333 21.05 0.0899959H31.69Z"
+                              fill="currentColor" />
+                          </svg>
+                        </div>
+                        <blockquote class="mt-8">
+                          {{ .content | markdownify }}
+                        </blockquote>
+                        <div class="mt-11 flex items-center">
+                          <div class="text-text-dark dark:text-white">
+                            {{ partial "image" (dict "Src" .avatar "Size" "50x50" "Class" "rounded-full" "Alt" .name) }}
+                          </div>
+                          <div class="ml-4">
+                            <h3 class="h5 font-primary font-semibold">
+                              {{ .name }}
+                            </h3>
+                            <p class="text-text-dark dark:text-white">
+                              {{ .designation | markdownify }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {{ end }}
+                </div>
+                <div
+                  class="testimonial-slider-pagination mt-9 flex items-center justify-center text-center"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {{ end }}
+  {{ end }}
+  <!-- /Testimonials -->
+{{ end }}
