@@ -44,6 +44,16 @@
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         darkMode = true;
       }
+      
+      // Listen for changes in system preference
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+        if (localStorage.getItem("theme") === null) {  // Only auto-switch if user hasn't manually set a preference
+          const newColorScheme = e.matches ? "dark" : "light";
+          document.documentElement.classList.toggle("dark", e.matches);
+          // Dispatch themechange event for the background
+          window.dispatchEvent(new Event('themechange'));
+        }
+      });
       {{ end }}
     }
 
@@ -66,6 +76,9 @@
             "theme",
             document.documentElement.classList.contains("dark") ? "dark" : "light"
           );
+          
+          // Dispatch a themechange event so the background can update
+          window.dispatchEvent(new Event('themechange'));
         });
       });
 

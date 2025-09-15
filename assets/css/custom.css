@@ -1,4 +1,11 @@
-/* Neumorphic style for navbar links and logo */
+/* Site-wide font configuration */
+:root {
+  /* Use the original font stack that was intended for the site */
+  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-secondary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Navbar links and logo */
 /* Adjust colors and shadows as needed to fit your design */
 .nav-link {
   color: #b4b8c5;
@@ -17,11 +24,13 @@
   transition: color .2s ease, text-shadow .2s ease; /* smooth hover */
 }
 
-/* Site-wide font override */
-:root {
-  --font-primary: Arial, Helvetica, sans-serif;
-  --font-secondary: Arial, Helvetica, sans-serif;
+/* Remove default glow in dark mode */
+.dark .nav-link {
+  color: #e6e9ef !important;
+  text-shadow: none; /* No glow by default in dark mode */
 }
+
+/* Note: Background configuration is now fully managed in background-config.js */
 
 html, body {
   font-family: var(--font-primary) !important;
@@ -321,17 +330,14 @@ header { background: var(--nodal-bg); }
    -1px -1px 0 rgba(255,255,255,0.55); /* highlight top-left */
 }
 
-/* Dark mode adjustment */
+/* Dark mode adjustment - white glow only on hover */
 .dark .nav-link:hover,
 .dark .nav-link:focus-visible {
-  color: #e3e6ef;
+  color: #ffffff;
   text-shadow:
-    1px 1px 0 rgba(0,0,0,0.85),
-   -1px -1px 0 rgba(255,255,255,0.10);
+    0 0 10px rgba(255,255,255,0.4), /* White glow */
+    0 0 15px rgba(255,255,255,0.2); /* Extended white glow */
 }
-
-/* Ensure navbar text is visible in dark mode */
-.dark .nav-link { color: #e6e9ef !important; }
 
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce){
@@ -341,6 +347,24 @@ header { background: var(--nodal-bg); }
   .logo-nodal .disc,
   .logo-nodal .ring{
     transition: none !important;
+  }
+}
+
+/* Background canvas styling */
+.backgroundCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Allow interaction with elements below */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backgroundCanvas {
+    display: none; /* Hide animation for users who prefer reduced motion */
   }
 }
 
