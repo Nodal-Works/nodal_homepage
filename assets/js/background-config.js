@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // These are the master settings for the background animation
       const CONFIG = {
       // Shape settings
-      cellSize: 20,                   // Size of each dot cell in pixels (increased from 16 to 18)
+      cellSize: 5,                   // Size of each dot cell in pixels (increased from 16 to 18)
       shape: 'circle',                // Options: circle, square, diamond, cross, point, ring
       
       // Animation settings
@@ -50,72 +50,53 @@ document.addEventListener('DOMContentLoaded', function() {
     let themeChangeRequested = false;
     let requestedTheme = '';
     
-    // Apply theme-specific settings with proper transition
-    const applyThemeSettings = () => {
-      // If a transition is already in progress, queue this request
-      if (themeTransitionInProgress) {
-        themeChangeRequested = true;
-        requestedTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        return; // Exit and wait for current transition to complete
-      }
-      
-      // Start transition
-      themeTransitionInProgress = true;
-      
-      // Determine if dark mode is active
-      const isDarkMode = document.documentElement.classList.contains('dark');
-      
-      // Step 1: Fade out completely (clear all dots)
-      window.bayerBackground.setOpacity(0);
-      
-      // Step 2: After a delay, change colors while still invisible
-      setTimeout(() => {
-        if (isDarkMode) {
-          // Dark mode colors - explicitly use string values to avoid any object reference issues
-          const primaryColor = CONFIG.dark.primaryDot;
-          const secondaryColor = CONFIG.dark.secondaryDot;
-          console.log('[bayerbg] Setting dark mode colors:', primaryColor, secondaryColor);
-          
-          // Force color application with direct string values
-          window.bayerBackground.setDots(primaryColor, secondaryColor);
-          
-          // Verify the colors were applied
-          console.log('[bayerbg] Dark mode colors applied, primary:', primaryColor);
-        } else {
-          // Light mode colors
-          const primaryColor = CONFIG.light.primaryDot;
-          const secondaryColor = CONFIG.light.secondaryDot;
-          console.log('[bayerbg] Setting light mode colors:', primaryColor, secondaryColor);
-          window.bayerBackground.setDots(primaryColor, secondaryColor);
-        }
-        
-        // Step 3: After colors are set, fade back in with new theme
-        setTimeout(() => {
-          if (isDarkMode) {
-            console.log('[bayerbg] Setting dark mode opacity:', CONFIG.dark.opacity);
-            window.bayerBackground.setOpacity(CONFIG.dark.opacity);
-          } else {
-            console.log('[bayerbg] Setting light mode opacity:', CONFIG.light.opacity);
-            window.bayerBackground.setOpacity(CONFIG.light.opacity);
+        // Add a flag to skip fade on first run
+        let isFirstApply = true;
+        // Apply theme-specific settings with proper transition
+        const applyThemeSettings = () => {
+          if (themeTransitionInProgress) {
+            themeChangeRequested = true;
+            requestedTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+            return;
           }
-          
-          console.log('[bayerbg] Theme changed to: ' + (isDarkMode ? 'dark' : 'light'));
-          
-          // Transition complete
-          themeTransitionInProgress = false;
-          
-          // Check if another theme change was requested during this transition
-          if (themeChangeRequested) {
-            themeChangeRequested = false;
-            // Only trigger another change if the requested theme is different from current
-            const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-            if (requestedTheme !== currentTheme) {
-              applyThemeSettings(); // Process the queued theme change
+          themeTransitionInProgress = true;
+          const isDarkMode = document.documentElement.classList.contains('dark');
+          // Only fade out if not first apply
+          if (!isFirstApply) {
+            window.bayerBackground.setOpacity(0);
+          }
+          setTimeout(() => {
+            // Set colors for the current theme
+            let primaryColor, secondaryColor, opacity;
+            if (isDarkMode) {
+              primaryColor = CONFIG.dark.primaryDot;
+              secondaryColor = CONFIG.dark.secondaryDot;
+              opacity = CONFIG.dark.opacity;
+              console.log('[bayerbg] Setting dark mode colors:', primaryColor, secondaryColor);
+            } else {
+              primaryColor = CONFIG.light.primaryDot;
+              secondaryColor = CONFIG.light.secondaryDot;
+              opacity = CONFIG.light.opacity;
+              console.log('[bayerbg] Setting light mode colors:', primaryColor, secondaryColor);
             }
-          }
-        }, 50); // Short delay before fade-in
-      }, 150); // Longer delay to ensure dots are completely gone
-    };
+            window.bayerBackground.setDots(primaryColor, secondaryColor);
+            // Fade in after color set
+            setTimeout(() => {
+              window.bayerBackground.setOpacity(opacity);
+              if (isFirstApply) isFirstApply = false;
+              console.log('[bayerbg] Theme changed to: ' + (isDarkMode ? 'dark' : 'light'));
+              themeTransitionInProgress = false;
+              // Check if another theme change was requested during this transition
+              if (themeChangeRequested) {
+                themeChangeRequested = false;
+                const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                if (requestedTheme !== currentTheme) {
+                  applyThemeSettings();
+                }
+              }
+            }, 50); // Short delay before fade-in
+          }, isFirstApply ? 0 : 150); // No delay on first run
+        };
     
     // Initial setup
     applyThemeSettings();
