@@ -1,5 +1,10 @@
+/* Ensure blur is set for dark mode on bg-gradient */
+.bg-gradient:where(.dark, .dark *) {
+  --blur-md: 12px;
+  background-color: rgba(30,41,59,0.2); /* dark blue with 0.2 opacity */
+}
 @utility bg-gradient {
-  @apply bg-linear-to-b from-[rgba(249,249,249,1)] from-[0.53%] to-white to-[83.28%] dark:from-darkmode-light dark:to-darkmode-body;
+  @apply bg-[rgba(255,255,255,0.2)] backdrop-blur-md dark:bg-darkmode-light dark:backdrop-blur-md;
 }
 
 /* form style */

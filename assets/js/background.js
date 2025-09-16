@@ -39,7 +39,7 @@
     var defaults = {
       dot:  readVar('--bayer-dot',  readData(body, 'bayer-dot',  '#4d525f')),
       dot2: readVar('--bayer-dot2', readData(body, 'bayer-dot2', '#6ea3ff')),
-      opacity: parseFloat(readData(body, 'bayer-opacity', '0.22')), // Default opacity lowered to 0.22
+      opacity: parseFloat(readData(body, 'bayer-opacity', '0.50')), // Default opacity lowered to 0.22
       cellSize: parseFloat(readData(body, 'bayer-cell', '5')),     // Default cell size changed to 16
       shape: readData(body, 'bayer-shape', 'circle'),               // Default shape is circle
       twoToneMode: parseFloat(readData(body, 'bayer-mode', '1')),   // 0=random,1=density,2=edge

@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Light mode settings
       light: {
-        primaryDot: '#4d525f',        // Primary dot color in light mode
+        primaryDot: '#ff69b4',        // Primary dot color in light mode (pink)
         secondaryDot: '#6ea3ff',      // Secondary dot color in light mode
-        opacity: 0.22                 // Opacity in light mode (0.0-1.0)
+        opacity: 0.60                 // Opacity in light mode (0.0-1.0)
       },
       
       // Dark mode settings
