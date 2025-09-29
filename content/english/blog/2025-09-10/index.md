@@ -52,11 +52,13 @@ data <- readRDS(file = "../input/clean_data.rds")
 
 </details>
 
-<figure>
-<img src="asset/culmen_depth.png" width="300" alt="Bill measurement explanation" />
-<figcaption aria-hidden="true">Bill measurement explanation</figcaption>
-</figure>
 
+<div class="blog-content">
+  <figure>
+    <img src="asset/culmen_depth.png" width="300" alt="Bill measurement explanation" />
+  <figcaption aria-hidden="true">Bill measurement explanation</figcaption>
+  </figure>
+</div>
 ## Bill Length and Bill Depth
 
 Now, let's make some descriptive analysis, including <b>summary statistics</b> and <b>graphs</b>.
@@ -81,12 +83,15 @@ data %>%
     ) + 
   theme_void()
 ```
-
 </details>
-<figure>
-<img src="analysis.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-1.png" data-fig-align="center" width="480" alt="Relationship between bill length and bill depth. All data points included." />
-<figcaption aria-hidden="true">Relationship between bill <b>length</b> and bill <b>depth</b>.<br><b>All</b> data points included.</figcaption>
-</figure>
+
+<div class="blog-content">
+  <figure>
+    <img src="analysis.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-1.png" width="480" alt="Relationship between bill length and bill depth. All data points included." />
+    <figcaption aria-hidden="true">Relationship between bill <b>length</b> and bill <b>depth</b>.<br><b>All</b> data points included.</figcaption>
+  </figure>
+</div>
+
 
 It is also interesting to note that `bill length` a and `bill depth` are quite different from one specie to another. This is summarized in the 2 tables below:
 
@@ -146,7 +151,36 @@ It is also interesting to note that `bill length` a and `bill depth` are quite d
     2 Chinstrap               18.4
     3 Gentoo                  15.0
 
-\### Average Bill Length by Species
+## or even better
+<div style="display: flex; gap: 50px; text-align: center;">
+
+  <div>
+    <h3>Average Bill Dimensions by Species</h3>
+    <pre>
+# A tibble: 3 × 2
+  species   average_bill_length
+  <chr>                   <dbl>
+1 Adelie                   38.8
+2 Chinstrap                48.8
+3 Gentoo                   47.5
+    </pre>
+  </div>
+
+  <div>
+    <h3>Average Bill Depth by Species</h3>
+    <pre>
+# A tibble: 3 × 2
+  species   average_bill_depth
+  <chr>                  <dbl>
+1 Adelie                  18.3
+2 Chinstrap               18.4
+3 Gentoo                   15.0
+    </pre>
+  </div>
+
+</div>
+
+### Average Bill Length by Species
 
 <details class="code-fold">
 <summary>Code</summary>
@@ -248,7 +282,13 @@ p1 + p2 + p3
 
 </details>
 
-<figure>
-<img src="analysis.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-1.png" width="864" alt="There is actually a positive correlation when split by species." />
-<figcaption aria-hidden="true">There is actually a positive correlation when split by species.</figcaption>
-</figure>
+
+
+<div class="blog-content">
+  <figure>
+    <img src="analysis.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-1.png" 
+         width="864" 
+         alt="There is actually a positive correlation when split by species." />
+    <figcaption>There is actually a positive correlation when split by species.</figcaption>
+  </figure>
+</div>
