@@ -1,0 +1,21 @@
+/* Apply a semi-transparent white background to the main content */
+body {
+  background-color: orange; /* fallback solid white */
+  margin: 0;
+  padding: 0;
+}
+
+/* For content container */
+.main-content, .content {
+  background-color: rgba(48, 230, 81, 0.8); /* white with 80% opacity */
+  padding: 2rem;   /* space inside the container */
+  border-radius: 12px; /* optional rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* subtle shadow */
+}
+
+/* Optional: for posts with code blocks, keep background white for readability */
+pre, code {
+  background-color: #ffffff;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}

@@ -1,0 +1,15 @@
+{{ $file := .Get "file" }}
+{{ $content := readFile $file }}
+{{ $content | safeHTML }}
+
+{{/*  
+{{ $file := .Get "file" }}
+{{ $content := readFile $file }}  */}}
+
+{{/* Remove everything before <body> */}}
+{{/*  {{ $content = replaceRE "(?s)^.*?<body.*?>" "" $content }}  */}}
+
+{{/* Remove </body> and anything after */}}
+{{/*  {{ $content = replaceRE "(?s)</body>.*$" "" $content }}  */}}
+
+{{/*  {{ $content | safeHTML }}  */}}
