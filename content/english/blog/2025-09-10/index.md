@@ -151,31 +151,47 @@ It is also interesting to note that `bill length` a and `bill depth` are quite d
     2 Chinstrap               18.4
     3 Gentoo                  15.0
 
-## or even better
-<div style="display: flex; gap: 50px; text-align: center;">
+## one table
+
+<div style="display: flex; gap: 50px; flex-wrap: wrap; justify-content: center; text-align: center;">
 
   <div>
-    <h3>Average Bill Dimensions by Species</h3>
-    <pre>
-# A tibble: 3 × 2
-  species   average_bill_length
-  <chr>                   <dbl>
-1 Adelie                   38.8
-2 Chinstrap                48.8
-3 Gentoo                   47.5
-    </pre>
+    <h5>Average Bill Dimensions by Species</h5>
+    
+    # A tibble: 3 × 2
+      species   average_bill_length
+      <chr>                   <dbl>
+    1 Adelie                   38.8
+    2 Chinstrap                48.8
+    3 Gentoo                   47.5
+  </div>
+  </div>
+
+
+## or even better
+<div style="display: flex; gap: 50px; flex-wrap: wrap; justify-content: center; text-align: center;">
+
+  <div>
+    <h5>Average Bill Dimensions by Species</h5>
+    
+    # A tibble: 3 × 2
+      species   average_bill_length
+      <chr>                   <dbl>
+    1 Adelie                   38.8
+    2 Chinstrap                48.8
+    3 Gentoo                   47.5
   </div>
 
   <div>
-    <h3>Average Bill Depth by Species</h3>
-    <pre>
-# A tibble: 3 × 2
-  species   average_bill_depth
-  <chr>                  <dbl>
-1 Adelie                  18.3
-2 Chinstrap               18.4
-3 Gentoo                   15.0
-    </pre>
+    <h5>Average Bill Depth by Species</h5>
+
+
+    # A tibble: 3 × 2
+      species   average_bill_depth
+      <chr>                  <dbl>
+    1 Adelie                  18.3
+    2 Chinstrap               18.4
+    3 Gentoo                  15.0
   </div>
 
 </div>
@@ -200,7 +216,7 @@ It is also interesting to note that `bill length` a and `bill depth` are quite d
 | Chinstrap |            48.83382 |
 | Gentoo    |            47.50488 |
 
-\### Average Bill Depth by Species
+### Average Bill Depth by Species
 
 <details class="code-fold">
 <summary>Code</summary>
@@ -220,7 +236,59 @@ data %>%
 | Chinstrap |           18.42059 |
 | Gentoo    |           14.98211 |
 
-## OR
+### Or side by side
+
+<div style="display: flex; gap: 50px; flex-wrap: wrap; text-align: center;">
+
+<div style="flex: 1; text-align: center;">
+    <h5>Average Bill Length by Species</h3>
+<details class="code-fold">
+<summary>Code</summary>
+
+``` r
+  data %>%
+    group_by(species) %>% 
+    summarise(average_bill_length = mean(bill_length_mm, na.rm = TRUE)) %>%
+    knitr::kable()
+```
+
+</details>
+
+| species   | average_bill_length |
+|:----------|--------------------:|
+| Adelie    |            38.80872 |
+| Chinstrap |            48.83382 |
+| Gentoo    |            47.50488 |
+
+</div> 
+
+
+<div style="flex: 1; text-align: center;">
+    <h5>Average Bill Depth by Species</h3>
+
+
+<details class="code-fold">
+<summary>Code</summary>
+
+``` r
+data %>%
+  group_by(species) %>% 
+  summarise(average_bill_depth = mean(bill_depth_mm, na.rm = TRUE)) %>%
+  knitr::kable()
+```
+
+</details>
+
+| species   | average_bill_depth |
+|:----------|-------------------:|
+| Adelie    |           18.34228 |
+| Chinstrap |           18.42059 |
+| Gentoo    |           14.98211 |
+
+
+</div> 
+</div> 
+
 
 ### Average Bill Length by Species
 
