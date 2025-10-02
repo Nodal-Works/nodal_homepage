@@ -206,7 +206,7 @@ test  & theme(plot.background = element_rect(fill='transparent', color=NA))
 
 <div class="blog-content">
 <figure>
-<img src="hugo_test.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-1.png" width="864" alt="There is actually a positive correlation when split by species." />
+<img src="hugo_test.markdown_strict_files/figure-markdown_strict/unnamed-chunk-10-1.png" width="864" alt="There is actually a positive correlation when split by species." />
 <figcaption >There is actually a positive correlation when split by species.</figcaption>
 </figure>
 </div>
