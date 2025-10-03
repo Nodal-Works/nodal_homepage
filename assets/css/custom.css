@@ -1,1 +1,448 @@
-/* Add your own custom styles here */
+/* Site-wide font configuration */
+:root {
+  /* Use the original font stack that was intended for the site */
+  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-secondary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Navbar links and logo */
+/* Adjust colors and shadows as needed to fit your design */
+.nav-link {
+  color: #b4b8c5;
+  /* Ensure navbar links remain visible; override if another rule hides them */
+  color: #1f2937 !important; /* dark slate for light mode */
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-shadow:
+    -10px -10px 30px #ffffff70,
+    10px 10px 30px #aeaec040;
+  position: relative;
+  z-index: 2; /* Ensure text is above the pseudo-element */
+  overflow: visible;
+  transition: color .2s ease, text-shadow .2s ease; /* smooth hover */
+}
+
+/* Remove default glow in dark mode */
+.dark .nav-link {
+  color: #e6e9ef !important;
+  text-shadow: none; /* No glow by default in dark mode */
+}
+
+/* Note: Background configuration is now fully managed in background-config.js */
+
+html, body {
+  font-family: var(--font-primary) !important;
+}
+
+/* Ensure common elements inherit */
+h1,h2,h3,h4,h5,h6,
+p,a,li,button,input,select,textarea,
+.navbar,.nav-link,.btn {
+  font-family: inherit !important;
+}
+
+/* Shared page/header background so neumorphism works */
+:root { --nodal-bg: #ecf0f3; }
+.dark { --nodal-bg: #1c1c1c; }
+
+.site-header,
+.navbar,
+header { background: var(--nodal-bg); }
+
+/* Top-left dot */
+.neumorphic-logo{
+  display: inline-block;
+  width: 80px;               /* set explicit size! */
+  height: 80px;
+  border-radius: 50%;
+  background: var(--nodal-bg);
+  /* outer opposing shadows */
+  box-shadow:
+    -7px -7px 14px rgba(255,255,255,.75),
+     7px  7px 14px rgba(174,184,194,.30),
+  /* soft inner shadow (gentle falloff) instead of a hard rim */
+    /* gentle highlight near the top-left to suggest depth */
+    inset -1px -1px 6px rgba(255,255,255,0.35),
+    /* subtle inner shadow toward bottom-right for soft emboss */
+    inset 2px 2px 8px rgba(0,0,0,0.06);
+  /* make sure nothing clips the glow */
+  overflow: visible;
+  isolation: isolate;
+  transition: box-shadow .25s ease, transform .25s ease, background-color .25s ease;
+}
+
+.dark .neumorphic-logo{
+  /* fill the small dot with pure white in dark mode per design request */
+  background: #ffffff;
+  box-shadow:
+    -7px -7px 14px rgba(255,255,255,.18),
+     7px  7px 14px rgba(0,0,0,.45),
+  /* dark-mode: soft inner shadow with a stronger highlight to keep the surface readable */
+  inset -1px -1px 6px rgba(255,255,255,0.18),
+  inset 2px 2px 8px rgba(0,0,0,0.36);
+}
+
+/* Slightly deeper shadows on hover (animated) */
+.neumorphic-logo:hover,
+.neumorphic-logo:focus-visible{
+  box-shadow:
+    -12px -12px 22px rgba(255,255,255,.85),
+     12px  12px 22px rgba(174,184,194,.38),
+    inset -3px -3px 10px rgba(255,255,255,0.44),
+    inset  4px  4px 14px rgba(0,0,0,0.10);
+  transform: translateY(-2px) scale(1.02);
+}
+.dark .neumorphic-logo:hover,
+.dark .neumorphic-logo:focus-visible{
+  box-shadow:
+    -12px -12px 22px rgba(255,255,255,.26),
+     12px  12px 22px rgba(0,0,0,.60),
+    inset -3px -3px 12px rgba(255,255,255,0.26),
+    inset  4px  4px 16px rgba(0,0,0,0.56);
+  transform: translateY(-2px) scale(1.02);
+}
+
+
+/* CSS-only NODAL logo (neumorphic) */
+.logo-nodal {
+  --size: clamp(44px, 9vw, 140px);
+  --bg: var(--nodal-bg);     /* use the real page/header bg */
+  --text: var(--bg);         /* fill matches the surface! */
+  /* small, adjustable horizontal nudge to optically center the mark
+    (the ring at the left can make the visual center feel off) */
+  --logo-offset-x: -0.50em; /* tweak this value if you want more/less shift */
+  color: var(--text);
+
+  --hi: rgba(255,255,255,0.95);
+  --lo: rgba(174,184,194,0.45);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.06em;
+  font-size: var(--size);
+  line-height: 0.9;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  white-space: nowrap;    /* prevent logo breaking into multiple lines */
+  overflow: visible;     /* allow shadows to render outside bounds */
+  transform: translateX(var(--logo-offset-x));
+}
+
+/* If a parent sets --size (e.g. banner wrapper), ensure the logo uses it */
+.logo-nodal { font-size: var(--size); }
+
+.logo-nodal .letter{
+  display: inline-block;
+  /* same-surface fill + bevel edges */
+  text-shadow:
+  -0.03em -0.03em 0.05em rgba(255,255,255,.55),   /* softer, closer highlight (top-left) */
+   0.035em  0.035em 0.04em rgba(100,110,125,.24),   /* closer shadow (bottom-right) */
+   0        0        .65em rgba(255,255,255,.22); /* softer bloom */
+}
+
+/* Big disc for the “O” */
+.logo-nodal .disc {
+  width: 0.72em;
+  height: 0.72em;
+  border-radius: 50%;
+  background: var(--bg);
+  /* Neomorphic outer opposing shadows scaled for em units */
+  /* match letter shadows exactly: white highlight, gray shadow, soft bloom */
+  box-shadow:
+    -0.03em -0.03em 0.05em rgba(255,255,255,.55),   /* rim highlight (top-left) */
+     0.035em 0.035em 0.04em rgba(100,110,125,.24),   /* rim shadow (bottom-right) */
+     0 0 .65em rgba(255,255,255,.22);                /* soft bloom */
+  /* add a gentle inner shadow to match the neumorphic dot */
+  box-shadow:
+    -0.03em -0.03em 0.05em rgba(255,255,255,.55),
+     0.035em 0.035em 0.04em rgba(100,110,125,.24),
+     0 0 .65em rgba(255,255,255,.22),
+    inset -0.02em -0.02em 0.06em rgba(255,255,255,0.35),
+    inset 0.04em 0.04em 0.06em rgba(0,0,0,0.01);
+;
+}
+
+/* Ring accent – smooth full ring with subtle light/shadow (no pie-slices) */
+.logo-nodal .ring{
+  width: 0.46em;
+  height: 0.46em;
+  border-radius: 50%;
+  background-color: var(--nodal-bg);
+  /* keep the ring anchored to the text baseline (align with bottom of letters)
+    using flex align-self and a tiny translateY nudge for optical alignment */
+  display: inline-block;
+  align-self: baseline;
+  vertical-align: baseline;
+  transform: translateY(0.38em);
+  transform-origin: center;
+  /* thin inner shadow: subtle dark edge toward bottom-right and light edge toward top-left */
+  box-shadow:
+    inset -0.02em -0.02em 0.04em rgba(255,255,255,0.85), /* inner light highlight top-left */
+    inset 0.02em 0.02em 0.06em rgba(0,0,0,0.12);     /* inner dark shadow bottom-right */
+}
+
+.dark .logo-nodal .ring{
+  width: 0.46em;
+  height: 0.46em;
+  border-radius: 50%;
+  /* Use the pop color (light-mode bag) so the ring contrasts on dark backgrounds */
+  background-color: var(--pop);
+  /* dark mode: invert intensities for better contrast */
+  /* same baseline anchoring in dark mode; slightly larger nudge if needed */
+  display: inline-block;
+  align-self: baseline;
+  vertical-align: baseline;
+  transform: translateY(0.38em);
+  transform-origin: center;
+  box-shadow:
+    inset -0.02em -0.02em 0.06em rgba(255,255,255,0.40), /* stronger inner highlight */
+    inset 0.02em 0.02em 0.10em rgba(0,0,0,0.50);      /* slightly stronger inner shadow */
+  -webkit-mask: none;
+          mask: none;
+}
+
+/* Smoothly animate shadow changes for logo pieces */
+.logo-nodal,
+.logo-nodal .letter,
+.logo-nodal .disc,
+.logo-nodal .ring{
+  transition: box-shadow .25s ease, text-shadow .25s ease, transform .25s ease, background-color .25s ease, color .25s ease;
+}
+
+/* Slight lift and deeper bevel on hover */
+.logo-nodal:hover,
+.logo-nodal:focus-visible{
+  transform: translateX(var(--logo-offset-x)) translateY(-0.04em) scale(1.01);
+}
+
+.logo-nodal:hover .letter,
+.logo-nodal:focus-visible .letter{
+  text-shadow:
+  -0.05em -0.05em 0.08em rgba(255,255,255,.62),
+   0.055em  0.055em 0.06em rgba(100,110,125,.32),
+   0        0        .90em rgba(255,255,255,.26);
+}
+
+.logo-nodal:hover .disc,
+.logo-nodal:focus-visible .disc{
+  box-shadow:
+    -0.05em -0.05em 0.08em rgba(255,255,255,.62),
+     0.055em 0.055em 0.06em rgba(100,110,125,.32),
+     0 0 .90em rgba(255,255,255,.26),
+    inset -0.035em -0.035em 0.10em rgba(255,255,255,0.44),
+    inset  0.06em  0.06em 0.10em rgba(0,0,0,0.03);
+  transform: translateY(-0.02em) scale(1.015);
+}
+
+.logo-nodal:hover .ring,
+.logo-nodal:focus-visible .ring{
+  box-shadow:
+  inset -0.03em -0.03em 0.08em rgba(255,255,255,0.95),
+  inset  0.03em  0.03em 0.10em rgba(0,0,0,0.18);
+}
+
+/* Dark mode hover tuning */
+.dark .logo-nodal:hover .letter,
+.dark .logo-nodal:focus-visible .letter{
+  text-shadow:
+  -0.05em -0.05em 0.10em rgba(255,255,255,.38),
+   0.055em  0.055em 0.10em rgba(0,0,0,.66),
+   0        0        .85em rgba(255,255,255,.26);
+}
+
+.dark .logo-nodal:hover .disc,
+.dark .logo-nodal:focus-visible .disc{
+  box-shadow:
+    -0.05em -0.05em 0.10em rgba(255,255,255,.36),
+     0.055em 0.055em 0.10em rgba(0,0,0,.66),
+     0 0 .85em rgba(255,255,255,.24),
+    inset -0.035em -0.035em 0.18em rgba(255,255,255,0.26),
+    inset  0.06em  0.06em 0.26em rgba(0,0,0,0.58);
+  transform: translateY(-0.02em) scale(1.015);
+}
+
+.dark .logo-nodal:hover .ring,
+.dark .logo-nodal:focus-visible .ring{
+  box-shadow:
+  inset -0.03em -0.03em 0.10em rgba(255,255,255,0.52),
+  inset  0.03em  0.03em 0.16em rgba(0,0,0,0.60);
+}
+
+/* Size helpers (optional) */
+.logo-nodal--sm { --size: 32px; }
+.logo-nodal--md { --size: 56px; }
+.logo-nodal--lg { --size: 112px; }
+/* Added extra-large helpers so shortcode values like xl and 2xl work */
+.logo-nodal--xl { --size: 160px; }
+.logo-nodal--2xl { --size: 220px; }
+
+/* Dark mode tuning */
+.dark .logo-nodal { --bg: #1c1c1c; --text: #e6e9f2; }
+.dark .logo-nodal{ --bg:#1c1c1c; /* make logo text and surfaces pop by using the light-mode bag color */
+  /* Use the light-mode bag color so letters and discs contrast strongly on dark bg */
+  --pop: #ecf0f3; /* same as light-mode --nodal-bg */
+  --text: var(--pop); color:var(--text);
+  --bg: #1c1c1c; }
+
+.dark .logo-nodal .letter{
+  text-shadow:
+  -0.03em -0.03em 0.06em rgba(255,255,255,.30), /* stronger white rim */
+   0.035em  0.035em 0.06em rgba(0,0,0,.52),
+   0        0        .60em rgba(255,255,255,.20); /* stronger bloom */
+}
+.dark .logo-nodal .disc {
+  /* dark-mode disc: same neomorphic treatment but inverted shadows */
+  background: var(--bg);
+  /* dark-mode: match letter shadows exactly (inverted colors) */
+  box-shadow:
+    -0.03em -0.03em 0.06em rgba(255,255,255,.28),
+     0.035em 0.035em 0.06em rgba(0,0,0,.52),
+     0 0 .60em rgba(255,255,255,.18);
+  /* dark-mode: add soft inner shadow to the disc */
+  box-shadow:
+    -0.03em -0.03em 0.06em rgba(255,255,255,.28),
+     0.035em 0.035em 0.06em rgba(0,0,0,.52),
+     0 0 .60em rgba(255,255,255,.18),
+    inset -0.02em -0.02em 0.12em rgba(255,255,255,0.18),
+    inset 0.04em 0.04em 0.20em rgba(0,0,0,0.40);
+  /* Make disc use the pop color for stronger contrast in dark mode */
+  background: var(--pop);
+  background-image:
+    radial-gradient(130% 130% at 30% 30%,
+      rgba(255,255,255,0.90) 0%,
+      rgba(255,255,255,0.30) 18%,
+      var(--pop) 40%,
+      var(--pop) 100%);
+}
+/* dark ring removed */
+
+
+
+/* Subtle embossed effect on hover */
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: #cfd3de;
+  text-shadow:
+    1px 1px 0 rgba(0,0,0,0.18),    /* subtle inner shadow bottom-right */
+   -1px -1px 0 rgba(255,255,255,0.55); /* highlight top-left */
+}
+
+/* Dark mode adjustment - white glow only on hover */
+.dark .nav-link:hover,
+.dark .nav-link:focus-visible {
+  color: #ffffff;
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.4), /* White glow */
+    0 0 15px rgba(255,255,255,0.2); /* Extended white glow */
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .neumorphic-logo,
+  .logo-nodal,
+  .logo-nodal .letter,
+  .logo-nodal .disc,
+  .logo-nodal .ring{
+    transition: none !important;
+  }
+}
+
+/* Background canvas styling */
+.backgroundCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Allow interaction with elements below */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backgroundCanvas {
+    display: none; /* Hide animation for users who prefer reduced motion */
+  }
+}
+
+
+
+/* ------------------------------
+  For the teables
+   ------------------------------ */
+.content :is(pre:not(.not-prose)) {
+    background-color: #3e4e7d;;  /* light mode color */
+    border-radius: 0.5rem;       /* optional rounding */
+    padding: 1rem;               /* optional padding for nicer spacing */
+}
+
+/* Dark mode code block */
+.dark .content :is(pre:not(.not-prose)) {
+    background-color: #2c2c2c;
+    color: #f0f0f0;              /* ensure text is readable */
+}
+
+/* ------------------------------
+   Tables background and centering
+   ------------------------------ */
+.content table {
+    background-color: #f5f5f5;  /* light mode table bg */
+    margin-left: auto;
+    margin-right: auto;         /* centers table */
+    border-collapse: collapse;  /* optional, nicer table look */
+}
+
+.content table th,
+.content table td {
+    padding: 0.5rem;
+    border: 1px solid #ddd;    /* optional border */
+}
+
+.dark .content table {
+    background-color: #1c1c1c; 
+    color: #e6e9f2;            /* readable text in dark mode */
+}
+
+.dark .content table th,
+.dark .content table td {
+    border-color: #444;         /* optional dark mode border */
+}
+
+
+
+
+/* Only blog post images */
+.blog-content {
+    text-align: center; /* centers inline-block figures */
+}
+
+.blog-content figure {
+    display: inline-block;
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 1.5rem auto;  /* centers the figure */
+    text-align: center;
+}
+
+/* Dark mode for blog images */
+.dark .blog-content figure {
+    background-color: #1c1c1c;           
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    color: #e6e9f2;                      
+}
+
+/* Optional figcaption styling */
+.blog-content figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.dark .blog-content figure figcaption {
+    color: #ccc;
+}

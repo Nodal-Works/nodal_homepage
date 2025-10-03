@@ -1,13 +1,12 @@
 <header
   class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30">
   <nav class="navbar container">
-    <!-- logo -->
-    <div class="order-0">
-      <!-- navbar brand/logo -->
-      <a class="navbar-brand block" href="{{ site.Home.RelPermalink }}">
-        {{ partial "logo" }}
-      </a>
-    </div>
+  <!-- logo -->
+  <div class="order-0 flex items-center pl-10">
+    <a class="navbar-brand inline-flex items-center h-16" href="{{ site.Home.RelPermalink }}">
+      <div class="neumorphic-logo" role="img" aria-label="Nodal logo"></div>
+    </a>
+  </div>
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label

@@ -1,5 +1,5 @@
 
-name: Deploy Thulite site to Pages
+name: Deploy nodal homepage
 
 on:
   push:
