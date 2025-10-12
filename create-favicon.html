@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Generator - N.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #e0e0e0;
+            padding: 20px;
+        }
+        canvas {
+            border: 2px solid #333;
+            margin: 20px;
+        }
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 20px;
+        }
+        .control-group {
+            margin: 10px 0;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        input[type="color"], input[type="number"], select {
+            margin-left: 10px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .preview-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .preview-item {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nodal Favicon Generator - N</h1>
+    <div class="note">
+        ✨ Simple square favicon - clean and minimal
+    </div>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label for="bgColor">Background Color:</label>
+            <input type="color" id="bgColor" value="#ecf0f3">
+        </div>
+        <div class="control-group">
+            <label for="textColor">Text Color:</label>
+            <input type="color" id="textColor" value="#6b7280">
+        </div>
+        <div class="control-group">
+            <label for="fontSize">Font Size:</label>
+            <input type="number" id="fontSize" value="160" min="100" max="220">
+        </div>
+        <div class="control-group">
+            <button onclick="updateFavicon()">Update Preview</button>
+            <button onclick="downloadFavicon()">Download PNG (256x256)</button>
+            <button onclick="downloadFavicon(512)">Download 512x512</button>
+            <button onclick="downloadFavicon(32)">Download 32x32</button>
+        </div>
+    </div>
+
+    <div class="preview-group">
+        <div class="preview-item">
+            <h3>256x256</h3>
+            <canvas id="favicon" width="256" height="256"></canvas>
+        </div>
+        <div class="preview-item">
+            <h3>64x64 Preview</h3>
+            <canvas id="favicon64" width="64" height="64"></canvas>
+        </div>
+        <div class="preview-item">
+            <h3>32x32 Preview</h3>
+            <canvas id="favicon32" width="32" height="32"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function drawFavicon(canvas, size = 256) {
+            const ctx = canvas.getContext('2d');
+            const bgColor = document.getElementById('bgColor').value;
+            const textColor = document.getElementById('textColor').value;
+            const fontSize = parseInt(document.getElementById('fontSize').value) * (size / 256);
+
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+
+            // Draw square background
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, size, size);
+
+            // Set text properties - clean bold sans-serif
+            ctx.fillStyle = textColor;
+            ctx.font = `800 ${fontSize}px system-ui, -apple-system, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Draw the "N" text centered - simple, no shadows
+            const center = size / 2;
+            ctx.fillText('N', center, center);
+        }
+
+        function updateFavicon() {
+            drawFavicon(document.getElementById('favicon'), 256);
+            drawFavicon(document.getElementById('favicon64'), 64);
+            drawFavicon(document.getElementById('favicon32'), 32);
+        }
+
+        function downloadFavicon(size = 256) {
+            // Create a temporary canvas for the download
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = size;
+            tempCanvas.height = size;
+            drawFavicon(tempCanvas, size);
+
+            // Convert to blob and download
+            tempCanvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `favicon-${size}x${size}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        // Initial draw
+        updateFavicon();
+
+        // Auto-update on input change
+        document.getElementById('bgColor').addEventListener('input', updateFavicon);
+        document.getElementById('textColor').addEventListener('input', updateFavicon);
+        document.getElementById('fontSize').addEventListener('input', updateFavicon);
+    </script>
+</body>
+</html>
