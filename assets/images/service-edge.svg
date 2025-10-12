@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="500" height="400">
+  <defs>
+    <style>
+      @keyframes slideIn {
+        0% { opacity: 0; transform: translateX(var(--tx, 0)) translateY(var(--ty, 0)); }
+        100% { opacity: 1; transform: translateX(0) translateY(0); }
+      }
+      @keyframes connect {
+        0% { stroke-dashoffset: 1000; opacity: 0; }
+        100% { stroke-dashoffset: 0; opacity: 1; }
+      }
+      @keyframes glow {
+        0%, 100% { opacity: 0.08; }
+        50% { opacity: 0.08; }
+      }
+      @keyframes emerge {
+        0% { r: 0; opacity: 0; }
+        70% { r: 14; opacity: 1; }
+        100% { r: 12; opacity: 0.95; }
+      }
+      @keyframes shimmer {
+        0%, 100% { opacity: 0.85; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.02); }
+      }
+      
+      /* Academia element (top-left) - Book/Research */
+      .academia-group {
+        --tx: -80px;
+        --ty: -60px;
+        animation: slideIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        transform-origin: center;
+      }
+      
+      /* Design element (top-right) - Compass/Creative */
+      .design-group {
+        --tx: 80px;
+        --ty: -60px;
+        animation: slideIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation-delay: 0.4s;
+        opacity: 0;
+        transform-origin: center;
+      }
+      
+      /* Industry element (bottom) - Gear/Execution */
+      .industry-group {
+        --tx: 0px;
+        --ty: 80px;
+        animation: slideIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation-delay: 0.8s;
+        opacity: 0;
+        transform-origin: center;
+      }
+      
+      /* Connection lines */
+      .connect-line {
+        stroke-dasharray: 1000;
+        animation: connect 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+        opacity: 0;
+      }
+      .line-1 { animation-delay: 1.8s; }
+      .line-2 { animation-delay: 1.9s; }
+      .line-3 { animation-delay: 2.0s; }
+      
+      /* Central convergence node */
+      .center-node {
+        animation: emerge 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation-delay: 2.8s;
+        r: 0;
+      }
+      
+      /* Glow effects */
+      .glow-academia { 
+        animation: glow 4s ease-in-out infinite;
+        animation-delay: 3.5s;
+      }
+      .glow-design { 
+        animation: glow 4s ease-in-out infinite;
+        animation-delay: 3.8s;
+      }
+      .glow-industry { 
+        animation: glow 4s ease-in-out infinite;
+        animation-delay: 4.1s;
+      }
+      
+      /* Icon shimmer */
+      .icon-shimmer {
+        animation: shimmer 5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        animation-delay: 3.8s;
+        transform-origin: center;
+      }
+    </style>
+  </defs>
+  
+  <!-- Academia (top-left): Book/Research icon -->
+  <g class="academia-group">
+    <!-- Book shape -->
+    <rect x="90" y="70" width="60" height="75" rx="4" fill="none" stroke="#3182ce" stroke-width="3"/>
+    <line x1="120" y1="70" x2="120" y2="145" stroke="#3182ce" stroke-width="2"/>
+    <line x1="95" y1="85" x2="115" y2="85" stroke="#3182ce" stroke-width="1.5" opacity="0.6"/>
+    <line x1="95" y1="95" x2="115" y2="95" stroke="#3182ce" stroke-width="1.5" opacity="0.6"/>
+    <line x1="95" y1="105" x2="115" y2="105" stroke="#3182ce" stroke-width="1.5" opacity="0.6"/>
+    <line x1="125" y1="85" x2="145" y2="85" stroke="#3182ce" stroke-width="1.5" opacity="0.6"/>
+    <line x1="125" y1="95" x2="145" y2="95" stroke="#3182ce" stroke-width="1.5" opacity="0.6"/>
+    <line x1="125" y1="105" x2="145" y2="105" stroke="#3182ce" stroke-width="1.5" opacity="0.6"/>
+    
+    <!-- Academia node -->
+    <circle cx="120" cy="107" r="10" fill="#3182ce" opacity="0.9" class="icon-shimmer"/>
+  </g>
+  
+  <!-- Design (top-right): Compass/Creative tool -->
+  <g class="design-group">
+    <!-- Compass circle -->
+    <circle cx="380" cy="107" r="35" fill="none" stroke="#10b981" stroke-width="3"/>
+    
+    <!-- Compass needle -->
+    <line x1="380" y1="107" x2="380" y2="77" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="380,77 375,87 385,87" fill="#10b981"/>
+    
+    <!-- Compass points (cardinal directions) -->
+    <circle cx="380" cy="77" r="3" fill="#10b981"/>
+    <circle cx="410" cy="107" r="3" fill="#10b981" opacity="0.6"/>
+    <circle cx="380" cy="137" r="3" fill="#10b981" opacity="0.6"/>
+    <circle cx="350" cy="107" r="3" fill="#10b981" opacity="0.6"/>
+    
+    <!-- Design node -->
+    <circle cx="380" cy="107" r="10" fill="#10b981" opacity="0.9" class="icon-shimmer"/>
+  </g>
+  
+  <!-- Industry (bottom): Gear/Execution -->
+  <g class="industry-group">
+    <!-- Gear shape -->
+    <circle cx="250" cy="310" r="30" fill="none" stroke="#f59e0b" stroke-width="3"/>
+    <circle cx="250" cy="310" r="18" fill="none" stroke="#f59e0b" stroke-width="2"/>
+    
+    <!-- Gear teeth -->
+    <rect x="248" y="275" width="4" height="10" fill="#f59e0b"/>
+    <rect x="269" y="283" width="10" height="4" fill="#f59e0b"/>
+    <rect x="269" y="323" width="10" height="4" fill="#f59e0b"/>
+    <rect x="248" y="335" width="4" height="10" fill="#f59e0b"/>
+    <rect x="221" y="323" width="10" height="4" fill="#f59e0b"/>
+    <rect x="221" y="283" width="10" height="4" fill="#f59e0b"/>
+    
+    <!-- Industry node -->
+    <circle cx="250" cy="310" r="10" fill="#f59e0b" opacity="0.9" class="icon-shimmer"/>
+  </g>
+  
+  <!-- Glow effects behind icons -->
+  <ellipse cx="120" cy="107" rx="50" ry="40" fill="#3182ce" opacity="0.08" class="glow-academia"/>
+  <ellipse cx="380" cy="107" rx="50" ry="40" fill="#10b981" opacity="0.08" class="glow-design"/>
+  <ellipse cx="250" cy="310" rx="50" ry="40" fill="#f59e0b" opacity="0.08" class="glow-industry"/>
+  
+  <!-- Connection lines forming triangle -->
+  <path class="connect-line line-1" 
+    d="M 140 130 Q 200 170 230 240" 
+    fill="none" 
+    stroke="#6366f1" 
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-dasharray="5,5"/>
+  
+  <path class="connect-line line-2" 
+    d="M 360 130 Q 300 170 270 240" 
+    fill="none" 
+    stroke="#6366f1" 
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-dasharray="5,5"/>
+  
+  <path class="connect-line line-3" 
+    d="M 150 107 L 360 107" 
+    fill="none" 
+    stroke="#6366f1" 
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-dasharray="5,5"/>
+  
+  <!-- Central convergence point - "Our Edge" -->
+  <circle class="center-node" cx="250" cy="200" r="0" fill="#6366f1"/>
+  <circle class="center-node" cx="250" cy="200" r="0" fill="#ffffff" opacity="0.4" style="animation-delay: 2.9s;"/>
+  
+  <!-- Subtle connection particles -->
+  <circle cx="180" cy="155" r="2.5" fill="#6366f1" opacity="0" style="animation: emerge 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 3.4s;"/>
+  <circle cx="320" cy="155" r="2.5" fill="#6366f1" opacity="0" style="animation: emerge 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 3.5s;"/>
+  <circle cx="250" cy="260" r="2.5" fill="#6366f1" opacity="0" style="animation: emerge 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 3.6s;"/>
+  <circle cx="215" cy="180" r="2" fill="#6366f1" opacity="0" style="animation: emerge 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 3.7s;"/>
+  <circle cx="285" cy="180" r="2" fill="#6366f1" opacity="0" style="animation: emerge 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 3.8s;"/>
+  <circle cx="250" cy="235" r="2" fill="#6366f1" opacity="0" style="animation: emerge 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 3.9s;"/>
+  
+  <!-- Background subtle gradient circles for depth -->
+  <circle cx="250" cy="200" r="160" fill="none" stroke="#e0e7ff" stroke-width="1" opacity="0.15"/>
+  <circle cx="250" cy="200" r="180" fill="none" stroke="#e0e7ff" stroke-width="0.5" opacity="0.08"/>
+</svg>

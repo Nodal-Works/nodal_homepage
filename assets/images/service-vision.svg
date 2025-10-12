@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="500" height="400">
+  <defs>
+    <style>
+      @keyframes ripple {
+        0% { r: 60; opacity: 0.8; stroke-width: 4; }
+        100% { r: 150; opacity: 0; stroke-width: 1; }
+      }
+      @keyframes fade {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+      }
+      .ripple-1 { animation: ripple 3s ease-out infinite; }
+      .ripple-2 { animation: ripple 3s ease-out infinite; animation-delay: 0.75s; }
+      .ripple-3 { animation: ripple 3s ease-out infinite; animation-delay: 1.5s; }
+      .ripple-4 { animation: ripple 3s ease-out infinite; animation-delay: 2.25s; }
+      .dot { animation: fade 4s ease-in-out infinite; }
+    </style>
+  </defs>
+  
+  <!-- Center point (shifted right by 50px) -->
+  <circle cx="250" cy="200" r="18" fill="#3182ce" opacity="0.9"/>
+  <circle cx="250" cy="200" r="10" fill="#ffffff" opacity="0.6"/>
+  
+  <!-- Ripple circles -->
+  <circle class="ripple-1" cx="250" cy="200" r="60" fill="none" stroke="#3182ce"/>
+  <circle class="ripple-2" cx="250" cy="200" r="60" fill="none" stroke="#3182ce"/>
+  <circle class="ripple-3" cx="250" cy="200" r="60" fill="none" stroke="#10b981"/>
+  <circle class="ripple-4" cx="250" cy="200" r="60" fill="none" stroke="#10b981"/>
+  
+  <!-- People dots around the circle -->
+  <circle class="dot" cx="250" cy="80" r="14" fill="#2d3748"/>
+  <circle class="dot" cx="335" cy="115" r="14" fill="#2d3748" style="animation-delay: 0.5s;"/>
+  <circle class="dot" cx="370" cy="200" r="14" fill="#2d3748" style="animation-delay: 1s;"/>
+  <circle class="dot" cx="335" cy="285" r="14" fill="#2d3748" style="animation-delay: 1.5s;"/>
+  <circle class="dot" cx="250" cy="320" r="14" fill="#2d3748" style="animation-delay: 2s;"/>
+  <circle class="dot" cx="165" cy="285" r="14" fill="#2d3748" style="animation-delay: 2.5s;"/>
+  <circle class="dot" cx="130" cy="200" r="14" fill="#2d3748" style="animation-delay: 3s;"/>
+  <circle class="dot" cx="165" cy="115" r="14" fill="#2d3748" style="animation-delay: 3.5s;"/>
+</svg>

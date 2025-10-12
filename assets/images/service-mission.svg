@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="500" height="400">
+  <defs>
+    <style>
+      @keyframes grow {
+        0% { stroke-dashoffset: 1000; opacity: 0; }
+        100% { stroke-dashoffset: 0; opacity: 1; }
+      }
+      @keyframes bloom {
+        0% { r: 0; opacity: 0; }
+        60% { r: 10; opacity: 1; }
+        100% { r: 8; opacity: 0.9; }
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 1; }
+      }
+      
+      .trunk { 
+        stroke-dasharray: 1000;
+        animation: grow 1.2s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; 
+      }
+      .branch-1 { 
+        stroke-dasharray: 1000;
+        animation: grow 0.9s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; 
+        animation-delay: 1.2s; 
+        opacity: 0;
+      }
+      .branch-2 { 
+        stroke-dasharray: 1000;
+        animation: grow 0.9s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; 
+        animation-delay: 1.3s; 
+        opacity: 0;
+      }
+      .branch-2-1 { 
+        stroke-dasharray: 1000;
+        animation: grow 0.7s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; 
+        animation-delay: 2.1s; 
+        opacity: 0;
+      }
+      .branch-2-2 { 
+        stroke-dasharray: 1000;
+        animation: grow 0.7s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; 
+        animation-delay: 2.2s; 
+        opacity: 0;
+      }
+      .branch-2-3 { 
+        stroke-dasharray: 1000;
+        animation: grow 0.7s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; 
+        animation-delay: 2.3s; 
+        opacity: 0;
+      }
+      .branch-2-4 { 
+        stroke-dasharray: 1000;
+        animation: grow 0.7s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; 
+        animation-delay: 2.4s; 
+        opacity: 0;
+      }
+      
+      .node {
+        animation: bloom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, pulse 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        transform-origin: center;
+      }
+      .node-1 { animation-delay: 2.1s, 2.7s; }
+      .node-2 { animation-delay: 2.3s, 2.9s; }
+      .node-3 { animation-delay: 2.8s, 3.4s; }
+      .node-4 { animation-delay: 2.9s, 3.5s; }
+      .node-5 { animation-delay: 3.0s, 3.6s; }
+      .node-6 { animation-delay: 3.1s, 3.7s; }
+    </style>
+  </defs>
+  
+  <!-- Root/Starting point -->
+  <circle cx="100" cy="200" r="14" fill="#2d3748"/>
+  <circle cx="100" cy="200" r="7" fill="#3182ce" opacity="0.9"/>
+  
+  <!-- Main trunk -->
+  <path class="trunk" 
+    d="M 100 200 L 220 200" 
+    fill="none" 
+    stroke="#2d3748" 
+    stroke-width="6"
+    stroke-linecap="round"/>
+  
+  <!-- Primary branches from trunk -->
+  <path class="branch-1" 
+    d="M 220 200 Q 280 160 340 140" 
+    fill="none" 
+    stroke="#10b981" 
+    stroke-width="5"
+    stroke-linecap="round"/>
+  
+  <path class="branch-2" 
+    d="M 220 200 Q 280 240 340 260" 
+    fill="none" 
+    stroke="#f59e0b" 
+    stroke-width="5"
+    stroke-linecap="round"/>
+  
+  <!-- Secondary branches - growing from upper primary -->
+  <path class="branch-2-1" 
+    d="M 340 140 Q 370 120 400 110" 
+    fill="none" 
+    stroke="#10b981" 
+    stroke-width="4"
+    stroke-linecap="round"/>
+  
+  <path class="branch-2-2" 
+    d="M 340 140 Q 370 145 400 150" 
+    fill="none" 
+    stroke="#3182ce" 
+    stroke-width="4"
+    stroke-linecap="round"/>
+  
+  <!-- Secondary branches - growing from lower primary -->
+  <path class="branch-2-3" 
+    d="M 340 260 Q 370 255 400 250" 
+    fill="none" 
+    stroke="#f59e0b" 
+    stroke-width="4"
+    stroke-linecap="round"/>
+  
+  <path class="branch-2-4" 
+    d="M 340 260 Q 370 280 400 290" 
+    fill="none" 
+    stroke="#ef4444" 
+    stroke-width="4"
+    stroke-linecap="round"/>
+  
+  <!-- Branch nodes that bloom -->
+  <circle class="node node-1" cx="340" cy="140" r="0" fill="#10b981"/>
+  <circle class="node node-2" cx="340" cy="260" r="0" fill="#f59e0b"/>
+  
+  <!-- Endpoint nodes -->
+  <circle class="node node-3" cx="400" cy="110" r="0" fill="#10b981"/>
+  <circle class="node node-4" cx="400" cy="150" r="0" fill="#3182ce"/>
+  <circle class="node node-5" cx="400" cy="250" r="0" fill="#f59e0b"/>
+  <circle class="node node-6" cx="400" cy="290" r="0" fill="#ef4444"/>
+  
+  <!-- Subtle organic glow zones -->
+  <ellipse cx="340" cy="140" rx="45" ry="30" fill="#10b981" opacity="0.06"/>
+  <ellipse cx="340" cy="260" rx="45" ry="30" fill="#f59e0b" opacity="0.06"/>
+  <ellipse cx="400" cy="130" rx="40" ry="50" fill="#10b981" opacity="0.04"/>
+  <ellipse cx="400" cy="270" rx="40" ry="50" fill="#ef4444" opacity="0.04"/>
+</svg>

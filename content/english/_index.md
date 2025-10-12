@@ -7,7 +7,7 @@ banner:
 ## Data-driven design for equitable cities
 
 We are a multidisciplinary urban consultancy combining research, design, and technology to help municipalities and organisations make informed, people-centred decisions for sustainable transformation.'
-  image: "/images/banner-city.jpg"
+
   button:
     enable: true
     label: "Explore Our Work"
@@ -16,7 +16,7 @@ We are a multidisciplinary urban consultancy combining research, design, and tec
 # Features
 features:
   - title: "Vision"
-    image: "/images/service-vision.png"
+    image: "/images/service-vision.svg"
     content: "As long as decision-makers approach sustainability with the right intentions, their technical competence should not be what holds them back. Our vision is to contribute to people-centred cities where urban policies are measurably more equitable and sustainable, and where residents experience tangible improvements in daily life – from accessibility and air quality to fairer energy costs."
     bulletpoints:
       - "Evidence-based urban planning"
@@ -28,7 +28,7 @@ features:
       link: ""
 
   - title: "Mission"
-    image: "/images/service-mission.png"
+    image: "/images/service-mission.svg"
     content: "We work with municipalities and organisations committed to sustainability by strengthening their use of data and evidence in decision-making. Our approach combines quantitative modelling, simulation, and strategic planning with qualitative insights to ensure policies are grounded in lived realities. In doing so, we not only provide answers but also help our clients discover better questions."
     bulletpoints:
       - "Quantitative modelling and simulation"
@@ -40,7 +40,7 @@ features:
       link: ""
 
   - title: "Our Edge"
-    image: "/images/service-edge.png"
+    image: "/images/service-edge.svg"
     content: "We bring together experience from academia, design, and industry. Complex projects often rely on us as the bridge between disciplines — combining analytical rigour with design thinking and practical execution. Our strength lies in being lean, personal, and responsive, while operating with the competence and reach of a much larger organisation."
     bulletpoints:
       - "Bridging research and practice"
@@ -52,7 +52,7 @@ features:
       link: ""
 
   - title: "What We Offer"
-    image: "/images/service-offer.png"
+    image: "/images/service-offer.svg"
     content: "We support cities, organisations, and research projects through data analysis, urban modelling, and design-driven strategy."
     bulletpoints:
       - "Urban data insights and spatial analysis"
