@@ -42,14 +42,6 @@
   integrity="{{ $scriptsLazy.Data.Integrity }}"
   src="{{ $scriptsLazy.RelPermalink }}"></script>
 
-<!-- Custom background animation - with defer to ensure THREE.js loads first -->
-{{ $background := resources.Get "js/background.js" }}
-<script defer src="{{ $background.RelPermalink }}"></script>
-
-<!-- Background configuration - loads after background.js with defer -->
-{{ $backgroundConfig := resources.Get "js/background-config.js" }}
-<script defer src="{{ $backgroundConfig.RelPermalink }}"></script>
-
 <!-- progressive web app -->
 {{ partialCached "pwa.html" . }}
 
