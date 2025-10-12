@@ -47,6 +47,27 @@ p,a,li,button,input,select,textarea,
 :root { --nodal-bg: #ecf0f3; }
 .dark { --nodal-bg: #1c1c1c; }
 
+/* Increase page margins (left/right spacing) */
+.container {
+  padding-left: 2rem !important;   /* Increased from default 1rem */
+  padding-right: 2rem !important;  /* Increased from default 1rem */
+}
+
+/* For larger screens, add even more spacing */
+@media (min-width: 768px) {
+  .container {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 4rem !important;
+    padding-right: 4rem !important;
+  }
+}
+
 .site-header,
 .navbar,
 header { background: var(--nodal-bg); }
