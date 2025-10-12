@@ -162,7 +162,6 @@ header { background: var(--nodal-bg); }
      0 0 .65em rgba(255,255,255,.22),
     inset -0.02em -0.02em 0.06em rgba(255,255,255,0.35),
     inset 0.04em 0.04em 0.06em rgba(0,0,0,0.01);
-;
 }
 
 /* Ring accent – smooth full ring with subtle light/shadow (no pie-slices) */
@@ -425,4 +424,42 @@ header { background: var(--nodal-bg); }
 
 .dark .blog-content figure figcaption {
     color: #ccc;
+}
+
+/* Simple bullet points (replace checkmarks with regular dots) */
+.content ul li {
+    list-style-type: disc !important;
+}
+
+.content ul li::before {
+    content: none !important;
+}
+
+/* Optionally, use a simple dash or bullet character instead */
+/* Uncomment below if you want a simple dash instead of dots:
+.content ul li {
+    list-style-type: none !important;
+}
+.content ul li::before {
+    content: "– " !important;
+    margin-right: 0.5em;
+}
+*/
+
+/* Make all SVG animations loop continuously */
+svg, svg * {
+    animation-iteration-count: infinite !important;
+}
+
+/* For SVGs with sequential animations, restart them after completion */
+@keyframes restartAnimation {
+    0% { animation-play-state: running; }
+    99% { animation-play-state: running; }
+    100% { animation-play-state: paused; }
+}
+
+/* Ensure SVG container maintains animation context */
+.features img[src$=".svg"],
+img[src*="service-"] {
+    will-change: auto;
 }
