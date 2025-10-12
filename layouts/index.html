@@ -20,7 +20,7 @@
           <!-- Button handling -->
           {{ with .button }}
             {{ if .enable }}
-              <a class="btn btn-primary" href="{{ .link }}">{{ .label }}</a>
+              <a class="btn btn-primary" href="{{ .link | relURL }}">{{ .label }}</a>
             {{ end }}
           {{ end }}
           </div>

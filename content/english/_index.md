@@ -11,7 +11,7 @@ We are a multidisciplinary urban consultancy combining research, design, and tec
   button:
     enable: true
     label: "Explore Our Work"
-    link: "/projects"
+    link: "projects/"
 
 # Features
 features:
