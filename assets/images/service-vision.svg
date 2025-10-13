@@ -1,19 +1,80 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="500" height="400">
   <defs>
     <style>
+      @-webkit-keyframes ripple {
+        0% { 
+          transform: scale(0.4); 
+          opacity: 0.8; 
+          stroke-width: 4; 
+        }
+        100% { 
+          transform: scale(2.5); 
+          opacity: 0; 
+          stroke-width: 1; 
+        }
+      }
       @keyframes ripple {
-        0% { r: 60; opacity: 0.8; stroke-width: 4; }
-        100% { r: 150; opacity: 0; stroke-width: 1; }
+        0% { 
+          transform: scale(0.4); 
+          opacity: 0.8; 
+          stroke-width: 4; 
+        }
+        100% { 
+          transform: scale(2.5); 
+          opacity: 0; 
+          stroke-width: 1; 
+        }
+      }
+      @-webkit-keyframes fade {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
       }
       @keyframes fade {
         0%, 100% { opacity: 0.7; }
         50% { opacity: 1; }
       }
-      .ripple-1 { animation: ripple 3s ease-out infinite; }
-      .ripple-2 { animation: ripple 3s ease-out infinite; animation-delay: 0.75s; }
-      .ripple-3 { animation: ripple 3s ease-out infinite; animation-delay: 1.5s; }
-      .ripple-4 { animation: ripple 3s ease-out infinite; animation-delay: 2.25s; }
-      .dot { animation: fade 4s ease-in-out infinite; }
+      .ripple-1 { 
+        animation: ripple 3s ease-out infinite;
+        -webkit-animation: ripple 3s ease-out infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+        -webkit-transform-origin: center;
+        -webkit-transform-box: fill-box;
+      }
+      .ripple-2 { 
+        animation: ripple 3s ease-out infinite; 
+        animation-delay: 0.75s;
+        -webkit-animation: ripple 3s ease-out infinite;
+        -webkit-animation-delay: 0.75s;
+        transform-origin: center;
+        transform-box: fill-box;
+        -webkit-transform-origin: center;
+        -webkit-transform-box: fill-box;
+      }
+      .ripple-3 { 
+        animation: ripple 3s ease-out infinite; 
+        animation-delay: 1.5s;
+        -webkit-animation: ripple 3s ease-out infinite;
+        -webkit-animation-delay: 1.5s;
+        transform-origin: center;
+        transform-box: fill-box;
+        -webkit-transform-origin: center;
+        -webkit-transform-box: fill-box;
+      }
+      .ripple-4 { 
+        animation: ripple 3s ease-out infinite; 
+        animation-delay: 2.25s;
+        -webkit-animation: ripple 3s ease-out infinite;
+        -webkit-animation-delay: 2.25s;
+        transform-origin: center;
+        transform-box: fill-box;
+        -webkit-transform-origin: center;
+        -webkit-transform-box: fill-box;
+      }
+      .dot { 
+        animation: fade 4s ease-in-out infinite;
+        -webkit-animation: fade 4s ease-in-out infinite;
+      }
     </style>
   </defs>
   
@@ -29,11 +90,11 @@
   
   <!-- People dots around the circle -->
   <circle class="dot" cx="250" cy="80" r="14" fill="#2d3748"/>
-  <circle class="dot" cx="335" cy="115" r="14" fill="#2d3748" style="animation-delay: 0.5s;"/>
-  <circle class="dot" cx="370" cy="200" r="14" fill="#2d3748" style="animation-delay: 1s;"/>
-  <circle class="dot" cx="335" cy="285" r="14" fill="#2d3748" style="animation-delay: 1.5s;"/>
-  <circle class="dot" cx="250" cy="320" r="14" fill="#2d3748" style="animation-delay: 2s;"/>
-  <circle class="dot" cx="165" cy="285" r="14" fill="#2d3748" style="animation-delay: 2.5s;"/>
-  <circle class="dot" cx="130" cy="200" r="14" fill="#2d3748" style="animation-delay: 3s;"/>
-  <circle class="dot" cx="165" cy="115" r="14" fill="#2d3748" style="animation-delay: 3.5s;"/>
+  <circle class="dot" cx="335" cy="115" r="14" fill="#2d3748" style="animation-delay: 0.5s; -webkit-animation-delay: 0.5s;"/>
+  <circle class="dot" cx="370" cy="200" r="14" fill="#2d3748" style="animation-delay: 1s; -webkit-animation-delay: 1s;"/>
+  <circle class="dot" cx="335" cy="285" r="14" fill="#2d3748" style="animation-delay: 1.5s; -webkit-animation-delay: 1.5s;"/>
+  <circle class="dot" cx="250" cy="320" r="14" fill="#2d3748" style="animation-delay: 2s; -webkit-animation-delay: 2s;"/>
+  <circle class="dot" cx="165" cy="285" r="14" fill="#2d3748" style="animation-delay: 2.5s; -webkit-animation-delay: 2.5s;"/>
+  <circle class="dot" cx="130" cy="200" r="14" fill="#2d3748" style="animation-delay: 3s; -webkit-animation-delay: 3s;"/>
+  <circle class="dot" cx="165" cy="115" r="14" fill="#2d3748" style="animation-delay: 3.5s; -webkit-animation-delay: 3.5s;"/>
 </svg>

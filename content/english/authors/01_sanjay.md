@@ -1,7 +1,7 @@
 ---
 title: Sanjay
 email: johndoe@email.com
-image: "/images/Nodals/node_01.jpeg"
+image: "/images/Nodals/node_01.jpg"
 description: Postdoctoral researcher at Chalmers University of Technology, specialising in accessibility, equity, and data-driven modelling.
 social:
   - name: github

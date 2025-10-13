@@ -1,7 +1,7 @@
 ---
 title: Jonathan
 email: samwilson@email.com
-image: "/images/Nodals/node_03.jpeg"
+image: "/images/Nodals/node_03.jpg"
 description: Postdoctoral researcher at Chalmers University of Technology, specializing in sustainable urban development, circular economy, and urban data analytics.
 social:
   - name: github
