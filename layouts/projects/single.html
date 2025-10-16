@@ -1,14 +1,176 @@
 {{ define "main" }}
-<article class="project-detail" style="max-width:700px;margin:2rem auto;padding:2rem;background:#fff;border-radius:8px;box-shadow:0 2px 8px #0001;">
-  <h1>{{ .Title }}</h1>
-  {{ with .Params.image }}
-  <img src="{{ . }}" alt="{{ $.Title }}" style="width:100%;max-height:350px;object-fit:cover;margin-bottom:1rem;">
-  {{ end }}
-  {{ with .Params.description }}
-  <p style="font-size:1.1rem;color:#555;">{{ . }}</p>
-  {{ end }}
-  <div class="project-content" style="margin-top:1.5rem;">
-    {{ .Content }}
-  </div>
-</article>
+<div class="project-layout" style="max-width:1400px;margin:3rem auto;padding:0 2rem;display:flex;gap:3rem;align-items:flex-start;">
+  
+  <!-- Table of Contents Sidebar -->
+  <aside class="project-toc" style="flex:0 0 250px;position:sticky;top:6rem;max-height:calc(100vh - 8rem);overflow-y:auto;">
+    <nav style="background:#f8f9fa;padding:1.5rem;border-radius:8px;">
+      <h3 style="margin:0 0 1rem 0;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#666;">On This Page</h3>
+      {{ .TableOfContents }}
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <article class="project-detail" style="flex:1;min-width:0;padding:3rem;background:#fff;border-radius:8px;box-shadow:0 2px 8px #0001;">
+    <h1 style="margin-bottom:1.5rem;">{{ .Title }}</h1>
+    {{ with .Params.image }}
+      {{ $image := $.Resources.GetMatch . }}
+      {{ if $image }}
+        <img src="{{ $image.RelPermalink }}" alt="{{ $.Title }}" style="width:100%;max-height:350px;object-fit:cover;margin-bottom:2rem;">
+      {{ else }}
+        <img src="{{ . | relURL }}" alt="{{ $.Title }}" style="width:100%;max-height:350px;object-fit:cover;margin-bottom:2rem;">
+      {{ end }}
+    {{ end }}
+    {{ with .Params.description }}
+    <p style="font-size:1.1rem;color:#555;margin-bottom:2rem;line-height:1.6;">{{ . }}</p>
+    {{ end }}
+    <div class="project-content" style="margin-top:2rem;line-height:1.8;">
+      {{ .Content }}
+    </div>
+  </article>
+</div>
+
+<style>
+/* Project page spacing improvements */
+.project-detail h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  scroll-margin-top: 6rem;
+}
+
+.project-detail h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 6rem;
+}
+
+.project-detail p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.project-detail img {
+  margin: 2rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.project-detail ul, .project-detail ol {
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+}
+
+.project-detail li {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.project-detail hr {
+  margin: 3rem 0;
+  border: none;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Table of Contents Styling */
+.project-toc nav {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.project-toc nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.project-toc nav::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.project-toc #TableOfContents {
+  font-size: 0.875rem;
+}
+
+.project-toc #TableOfContents > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-toc #TableOfContents ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-toc #TableOfContents ul ul {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.project-toc #TableOfContents li {
+  margin-bottom: 0.5rem;
+}
+
+.project-toc #TableOfContents a {
+  color: #555;
+  text-decoration: none;
+  display: block;
+  padding: 0.25rem 0;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+
+.project-toc #TableOfContents a:hover {
+  color: #000;
+}
+
+/* Responsive: Hide TOC on smaller screens */
+@media (max-width: 1024px) {
+  .project-toc {
+    display: none;
+  }
+  
+  .project-layout {
+    display: block !important;
+  }
+}
+
+/* Dark mode adjustments */
+.dark .project-detail {
+  background: #1c1c1c !important;
+  color: #e6e9f2 !important;
+}
+
+.dark .project-detail h1,
+.dark .project-detail h2,
+.dark .project-detail h3 {
+  color: #e6e9f2 !important;
+}
+
+.dark .project-detail p {
+  color: #d0d0d0 !important;
+}
+
+.dark .project-detail img {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.dark .project-detail hr {
+  border-top-color: #444;
+}
+
+.dark .project-toc nav {
+  background: #2a2a2a !important;
+}
+
+.dark .project-toc h3 {
+  color: #aaa !important;
+}
+
+.dark .project-toc #TableOfContents a {
+  color: #aaa;
+}
+
+.dark .project-toc #TableOfContents a:hover {
+  color: #fff;
+}
+</style>
 {{ end }}
