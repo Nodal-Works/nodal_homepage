@@ -1,73 +1,159 @@
 {{ define "main" }}
-<div class="project-layout" style="max-width:1400px;margin:3rem auto;padding:0 2rem;display:flex;gap:3rem;align-items:flex-start;">
+<div class="project-layout">
   
   <!-- Table of Contents Sidebar -->
-  <aside class="project-toc" style="flex:0 0 250px;position:sticky;top:6rem;max-height:calc(100vh - 8rem);overflow-y:auto;">
-    <nav style="background:#f8f9fa;padding:1.5rem;border-radius:8px;">
-      <h3 style="margin:0 0 1rem 0;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#666;">On This Page</h3>
+  <aside class="project-toc">
+    <nav class="project-toc-nav">
+      <h3 class="project-toc-title">On This Page</h3>
       {{ .TableOfContents }}
     </nav>
   </aside>
 
   <!-- Main Content -->
-  <article class="project-detail" style="flex:1;min-width:0;padding:3rem;background:#fff;border-radius:8px;box-shadow:0 2px 8px #0001;">
-    <h1 style="margin-bottom:1.5rem;">{{ .Title }}</h1>
+  <article class="project-detail">
+    <h1>{{ .Title }}</h1>
     {{ with .Params.image }}
       {{ $image := $.Resources.GetMatch . }}
       {{ if $image }}
-        <img src="{{ $image.RelPermalink }}" alt="{{ $.Title }}" style="width:100%;max-height:350px;object-fit:cover;margin-bottom:2rem;">
+        <img src="{{ $image.RelPermalink }}" alt="{{ $.Title }}" class="project-detail-image">
       {{ else }}
-        <img src="{{ . | relURL }}" alt="{{ $.Title }}" style="width:100%;max-height:350px;object-fit:cover;margin-bottom:2rem;">
+        <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="project-detail-image">
       {{ end }}
     {{ end }}
     {{ with .Params.description }}
-    <p style="font-size:1.1rem;color:#555;margin-bottom:2rem;line-height:1.6;">{{ . }}</p>
+    <p class="project-description">{{ . }}</p>
     {{ end }}
-    <div class="project-content" style="margin-top:2rem;line-height:1.8;">
+    <div class="project-content">
       {{ .Content }}
     </div>
   </article>
 </div>
 
 <style>
+/* Project Layout */
+.project-layout {
+  max-width: 1400px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* Table of Contents Sidebar */
+.project-toc {
+  flex: 0 0 250px;
+  position: sticky;
+  top: 6rem;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.project-toc-nav {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.project-toc-title {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  transition: color 0.2s;
+}
+
+/* Main Project Detail */
+.project-detail {
+  flex: 1;
+  min-width: 0;
+  padding: 3rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.project-detail h1 {
+  margin-bottom: 1.5rem;
+  color: #1c1c1c;
+  transition: color 0.2s;
+}
+
+.project-detail-image {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-description {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  transition: color 0.2s;
+}
+
+.project-content {
+  margin-top: 2rem;
+  line-height: 1.8;
+}
+
 /* Project page spacing improvements */
 .project-detail h2 {
   margin-top: 3rem;
   margin-bottom: 1.5rem;
   scroll-margin-top: 6rem;
+  color: #1c1c1c;
+  transition: color 0.2s;
 }
 
 .project-detail h3 {
   margin-top: 2.5rem;
   margin-bottom: 1rem;
   scroll-margin-top: 6rem;
+  color: #1c1c1c;
+  transition: color 0.2s;
 }
 
 .project-detail p {
   margin-bottom: 1.5rem;
   line-height: 1.8;
+  color: #555;
+  transition: color 0.2s;
 }
 
 .project-detail img {
   margin: 2rem 0;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.project-detail ul, .project-detail ol {
+.project-detail ul,
+.project-detail ol {
   margin-bottom: 2rem;
   padding-left: 2rem;
+  color: #555;
+  transition: color 0.2s;
 }
 
 .project-detail li {
   margin-bottom: 0.75rem;
   line-height: 1.7;
+  color: #555;
+  transition: color 0.2s;
 }
 
 .project-detail hr {
   margin: 3rem 0;
   border: none;
   border-top: 1px solid #e0e0e0;
+  transition: border-color 0.2s;
 }
 
 /* Table of Contents Styling */
@@ -133,44 +219,56 @@
   }
 }
 
-/* Dark mode adjustments */
+/* ========================================
+   DARK MODE - Project Pages
+   ======================================== */
+
 .dark .project-detail {
   background: #1c1c1c !important;
   color: #e6e9f2 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .dark .project-detail h1,
 .dark .project-detail h2,
 .dark .project-detail h3 {
+  color: #ffffff !important;
+}
+
+.dark .project-detail p,
+.dark .project-detail li,
+.dark .project-detail ul,
+.dark .project-detail ol {
   color: #e6e9f2 !important;
 }
 
-.dark .project-detail p {
-  color: #d0d0d0 !important;
+.dark .project-description {
+  color: #b0b5c1 !important;
 }
 
-.dark .project-detail img {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+.dark .project-detail-image {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .dark .project-detail hr {
-  border-top-color: #444;
+  border-top-color: #444 !important;
 }
 
-.dark .project-toc nav {
+.dark .project-toc-nav {
   background: #2a2a2a !important;
+  color: #e6e9f2;
 }
 
-.dark .project-toc h3 {
-  color: #aaa !important;
+.dark .project-toc-title {
+  color: #b0b5c1 !important;
 }
 
 .dark .project-toc #TableOfContents a {
-  color: #aaa;
+  color: #b0b5c1 !important;
 }
 
 .dark .project-toc #TableOfContents a:hover {
-  color: #fff;
+  color: #ffffff !important;
 }
 </style>
 {{ end }}

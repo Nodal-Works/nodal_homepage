@@ -37,6 +37,12 @@ html, body {
   color: #444 !important;
 }
 
+/* Dark mode text color for readability */
+.dark html,
+.dark body {
+  color: #e6e9f2 !important;
+}
+
 /* Ensure common elements inherit */
 h1,h2,h3,h4,h5,h6,
 p,a,li,button,input,select,textarea,
@@ -484,4 +490,68 @@ svg, svg * {
 .features img[src$=".svg"],
 img[src*="service-"] {
     will-change: auto;
+}
+
+/* ========================================
+   Comprehensive Dark Mode Text Readability
+   ======================================== */
+
+/* Headings - ensure strong contrast in both modes */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+    color: #ffffff !important;
+}
+
+/* Paragraphs and general text */
+.dark p,
+.dark li,
+.dark dd,
+.dark dt {
+    color: #e6e9f2 !important;
+}
+
+/* Links - ensure visible in dark mode */
+.dark a:not([class*="btn"]):not(.nav-link) {
+    color: #6dd5ff !important;
+}
+
+.dark a:hover:not([class*="btn"]):not(.nav-link) {
+    color: #a0e8ff !important;
+}
+
+/* Inputs and textareas */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="search"],
+.dark textarea,
+.dark select {
+    background-color: #2c2c2c !important;
+    color: #e6e9f2 !important;
+    border-color: #444 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+    color: #888 !important;
+}
+
+/* Labels */
+.dark label {
+    color: #e6e9f2 !important;
+}
+
+/* Code inline */
+.dark code:not([class*="language"]) {
+    background-color: #2c2c2c !important;
+    color: #a0e8ff !important;
+}
+
+/* Lists */
+.dark ul,
+.dark ol {
+    color: #e6e9f2 !important;
 }

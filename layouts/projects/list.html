@@ -5,7 +5,7 @@
 		<div class="mosaic-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;">
 			{{ range .Pages }}
 			{{ $page := . }}
-			<a href="{{ .RelPermalink }}" class="project-card" style="text-decoration:none;color:inherit;box-shadow:0 2px 8px #0001;border-radius:8px;overflow:hidden;background:#fff;transition:box-shadow .2s;">
+			<a href="{{ .RelPermalink }}" class="project-card">
 				{{ with .Params.image }}
 					{{ $image := $page.Resources.GetMatch . }}
 					{{ if $image }}
@@ -14,10 +14,10 @@
 						<img src="{{ . | relURL }}" alt="{{ $page.Title }}" style="width:100%;height:180px;object-fit:cover;">
 					{{ end }}
 				{{ end }}
-				<div style="padding:1rem;">
-					<h2 style="margin:0 0 0.5rem 0;font-size:1.25rem;">{{ .Title }}</h2>
+				<div class="project-card-content">
+					<h2 class="project-card-title">{{ .Title }}</h2>
 					{{ with .Params.description }}
-					<p style="margin:0 0 0.5rem 0;color:#555;">{{ . }}</p>
+					<p class="project-card-description">{{ . }}</p>
 					{{ end }}
 				</div>
 			</a>
@@ -25,4 +25,62 @@
 		</div>
 	</div>
 </section>
+
+<style>
+/* Project Cards - Grid List */
+.project-card {
+	text-decoration: none;
+	color: inherit;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #fff;
+	transition: box-shadow 0.2s, background-color 0.2s;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.project-card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.project-card-content {
+	padding: 1rem;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.project-card-title {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.25rem;
+	color: #1c1c1c;
+	transition: color 0.2s;
+}
+
+.project-card-description {
+	margin: 0;
+	color: #555;
+	transition: color 0.2s;
+}
+
+/* Dark Mode - Project Cards */
+.dark .project-card {
+	background: #2a2a2a;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.dark .project-card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.dark .project-card-title {
+	color: #ffffff;
+}
+
+.dark .project-card-description {
+	color: #b0b5c1;
+}
+</style>
 {{ end }}
