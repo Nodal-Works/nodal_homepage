@@ -1,5 +1,5 @@
 ---
-title: "Enabling Large-Scale Building Energy Research at Chalmers University"
+title: "Energy Plus Simulation Manager (EPSM)"
 date: 2025-09-14
 image: "EPSM_hero.png"
 description: "How NODAL developed a custom simulation platform to help researchers at Chalmers University of Technology analyse building energy performance at scale"
