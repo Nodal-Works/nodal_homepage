@@ -6,6 +6,15 @@ draft: false
 
 # Services
 services:
+  - title: "Analytics"
+    image: "/images/service-analytics.svg"
+    content: "We transform raw data into actionable insights through rigorous analysis. Our analytical capabilities span spatial data, urban systems, energy performance, mobility patterns, and social equity metrics—all grounded in evidence-based methods."
+    bulletpoints:
+      - "Urban spatial analysis and GIS"
+      - "Energy system modelling and optimization"
+      - "Mobility and accessibility analysis"
+      - "Social equity and impact assessment"
+      
   - title: "Scenario Building"
     image: "/images/service-scenario.svg"
     content: "We help you explore possible futures by developing robust scenarios that account for uncertainty and complexity. Through collaborative workshops and quantitative modelling, we map out pathways that inform strategic planning and policy development."
@@ -15,14 +24,7 @@ services:
       - "Pathway analysis and decision trees"
       - "Policy scenario testing and evaluation"
 
-  - title: "Analytics"
-    image: "/images/service-analytics.svg"
-    content: "We transform raw data into actionable insights through rigorous analysis. Our analytical capabilities span spatial data, urban systems, energy performance, mobility patterns, and social equity metrics—all grounded in evidence-based methods."
-    bulletpoints:
-      - "Urban spatial analysis and GIS"
-      - "Energy system modelling and optimization"
-      - "Mobility and accessibility analysis"
-      - "Social equity and impact assessment"
+
 
   - title: "Digitalisation Strategy"
     image: "/images/service-digital.svg"
