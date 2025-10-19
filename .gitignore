@@ -8,8 +8,11 @@ npm-debug.log
 node_modules
 builds
 public
-resources
-.hugo_build.lock
+/resources/
+*.DS_Store
+/go_installer.msi
+go.zip
+hugo.exe
 jsconfig.json
 hugo_stats.json
 go.sum

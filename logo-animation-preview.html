@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodal Logo Animation Preview</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #ecf0f3;
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Theme variables */
+        :root {
+            --nodal-bg: #ecf0f3;
+        }
+
+        .dark {
+            --nodal-bg: #1c1c1c;
+        }
+
+        .demo-container {
+            text-align: center;
+            padding: 40px;
+            background: var(--nodal-bg);
+            border-radius: 20px;
+            box-shadow: 
+                -20px -20px 40px rgba(255,255,255,.75),
+                20px 20px 40px rgba(174,184,194,.30);
+            margin-bottom: 40px;
+        }
+
+        /* CSS-only NODAL logo (neumorphic) */
+        .logo-nodal {
+            --size: clamp(44px, 9vw, 140px);
+            --bg: var(--nodal-bg);
+            --text: var(--bg);
+            --logo-offset-x: -0.50em;
+            color: var(--text);
+
+            --hi: rgba(255,255,255,0.95);
+            --lo: rgba(174,184,194,0.45);
+
+            display: inline-flex;
+            align-items: center;
+            gap: 0.06em;
+            font-size: var(--size);
+            line-height: 0.9;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: visible;
+            transform: translateX(var(--logo-offset-x));
+            cursor: pointer;
+        }
+
+        .logo-nodal .letter{
+            display: inline-block;
+            text-shadow:
+                -0.03em -0.03em 0.05em rgba(255,255,255,.55),
+                0.035em  0.035em 0.04em rgba(100,110,125,.24),
+                0        0        .65em rgba(255,255,255,.22);
+        }
+
+        /* Big disc for the "O" */
+        .logo-nodal .disc {
+            width: 0.72em;
+            height: 0.72em;
+            border-radius: 50%;
+            background: var(--bg);
+            box-shadow:
+                -0.03em -0.03em 0.05em rgba(255,255,255,.55),
+                0.035em 0.035em 0.04em rgba(100,110,125,.24),
+                0 0 .65em rgba(255,255,255,.22),
+                inset -0.02em -0.02em 0.06em rgba(255,255,255,0.35),
+                inset 0.04em 0.04em 0.06em rgba(0,0,0,0.01);
+        }
+
+        /* Ring accent */
+        .logo-nodal .ring{
+            width: 0.46em;
+            height: 0.46em;
+            border-radius: 50%;
+            background-color: var(--nodal-bg);
+            display: inline-block;
+            align-self: baseline;
+            vertical-align: baseline;
+            transform: translateY(0.38em);
+            transform-origin: center;
+            box-shadow:
+                inset -0.02em -0.02em 0.04em rgba(255,255,255,0.85),
+                inset 0.02em 0.02em 0.06em rgba(0,0,0,0.12);
+        }
+
+        /* Smoothly animate shadow changes for logo pieces */
+        .logo-nodal,
+        .logo-nodal .letter,
+        .logo-nodal .disc,
+        .logo-nodal .ring{
+            transition: box-shadow .25s ease, text-shadow .25s ease, transform .25s ease, background-color .25s ease, color .25s ease;
+        }
+
+        /* Slight lift and deeper bevel on hover */
+        .logo-nodal:hover,
+        .logo-nodal:focus-visible{
+            transform: translateX(var(--logo-offset-x)) translateY(-0.04em) scale(1.01);
+        }
+
+        .logo-nodal:hover .letter,
+        .logo-nodal:focus-visible .letter{
+            text-shadow:
+                -0.05em -0.05em 0.08em rgba(255,255,255,.62),
+                0.055em  0.055em 0.06em rgba(100,110,125,.32),
+                0        0        .90em rgba(255,255,255,.26);
+        }
+
+        .logo-nodal:hover .disc,
+        .logo-nodal:focus-visible .disc{
+            box-shadow:
+                -0.05em -0.05em 0.08em rgba(255,255,255,.62),
+                0.055em 0.055em 0.06em rgba(100,110,125,.32),
+                0 0 .90em rgba(255,255,255,.26),
+                inset -0.035em -0.035em 0.10em rgba(255,255,255,0.44),
+                inset  0.06em  0.06em 0.10em rgba(0,0,0,0.03);
+            transform: translateY(-0.02em) scale(1.015);
+        }
+
+        .logo-nodal:hover .ring,
+        .logo-nodal:focus-visible .ring{
+            box-shadow:
+                inset -0.03em -0.03em 0.08em rgba(255,255,255,0.95),
+                inset  0.03em  0.03em 0.10em rgba(0,0,0,0.18);
+        }
+
+        /* Size helpers */
+        .logo-nodal--sm { --size: 32px; }
+        .logo-nodal--md { --size: 56px; }
+        .logo-nodal--lg { --size: 112px; }
+        .logo-nodal--xl { --size: 160px; }
+        .logo-nodal--2xl { --size: 220px; }
+
+        /* Instructions */
+        .instructions {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .instructions p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .logo-sizes {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .logo-size-demo {
+            text-align: center;
+        }
+
+        .logo-size-demo h3 {
+            margin: 10px 0 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Dark mode styles */
+        body.dark {
+            background: #1c1c1c;
+            color: #e6e9f2;
+        }
+
+        .dark .demo-container {
+            background: #1c1c1c;
+            box-shadow: 
+                -20px -20px 40px rgba(255,255,255,.18),
+                20px 20px 40px rgba(0,0,0,.45);
+        }
+
+        .dark .instructions {
+            background: #2c2c2c;
+            color: #e6e9f2;
+        }
+
+        .dark .instructions h2 {
+            color: #e6e9f2;
+        }
+
+        .dark .instructions p {
+            color: #ccc;
+        }
+
+        .dark .logo-size-demo h3 {
+            color: #ccc;
+        }
+
+        /* Dark mode logo adjustments */
+        .dark .logo-nodal { 
+            --bg: #1c1c1c; 
+            --pop: #ecf0f3; 
+            --text: var(--pop); 
+            color: var(--text);
+        }
+
+        .dark .logo-nodal .letter{
+            text-shadow:
+                -0.03em -0.03em 0.06em rgba(255,255,255,.30),
+                0.035em  0.035em 0.06em rgba(0,0,0,.52),
+                0        0        .60em rgba(255,255,255,.20);
+        }
+
+        .dark .logo-nodal .disc {
+            background: var(--pop);
+            background-image:
+                radial-gradient(130% 130% at 30% 30%,
+                    rgba(255,255,255,0.90) 0%,
+                    rgba(255,255,255,0.30) 18%,
+                    var(--pop) 40%,
+                    var(--pop) 100%);
+            box-shadow:
+                -0.03em -0.03em 0.06em rgba(255,255,255,.28),
+                0.035em 0.035em 0.06em rgba(0,0,0,.52),
+                0 0 .60em rgba(255,255,255,.18),
+                inset -0.02em -0.02em 0.12em rgba(255,255,255,0.18),
+                inset 0.04em 0.04em 0.20em rgba(0,0,0,0.40);
+        }
+
+        .dark .logo-nodal .ring {
+            background-color: var(--pop);
+            box-shadow:
+                inset -0.02em -0.02em 0.06em rgba(255,255,255,0.40),
+                inset 0.02em 0.02em 0.10em rgba(0,0,0,0.50);
+        }
+
+        /* Dark mode hover effects */
+        .dark .logo-nodal:hover .letter,
+        .dark .logo-nodal:focus-visible .letter{
+            text-shadow:
+                -0.05em -0.05em 0.10em rgba(255,255,255,.38),
+                0.055em  0.055em 0.10em rgba(0,0,0,.66),
+                0        0        .85em rgba(255,255,255,.26);
+        }
+
+        .dark .logo-nodal:hover .disc,
+        .dark .logo-nodal:focus-visible .disc{
+            box-shadow:
+                -0.05em -0.05em 0.10em rgba(255,255,255,.36),
+                0.055em 0.055em 0.10em rgba(0,0,0,.66),
+                0 0 .85em rgba(255,255,255,.24),
+                inset -0.035em -0.035em 0.18em rgba(255,255,255,0.26),
+                inset  0.06em  0.06em 0.26em rgba(0,0,0,0.58);
+            transform: translateY(-0.02em) scale(1.015);
+        }
+
+        .dark .logo-nodal:hover .ring,
+        .dark .logo-nodal:focus-visible .ring{
+            box-shadow:
+                inset -0.03em -0.03em 0.10em rgba(255,255,255,0.52),
+                inset  0.03em  0.03em 0.16em rgba(0,0,0,0.60);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
+    
+    <div class="demo-container">
+        <h1>Nodal Logo Animation Demo</h1>
+        
+        <div class="logo-sizes">
+            <div class="logo-size-demo">
+                <h3>Small (32px)</h3>
+                <span class="logo-nodal logo-nodal--sm" aria-label="NODAL">
+                    <span class="letter">N</span>
+                    <span class="disc" aria-hidden="true"></span>
+                    <span class="letter">D</span>
+                    <span class="letter">A</span>
+                    <span class="letter">L</span>
+                    <span class="ring" aria-hidden="true"></span>
+                </span>
+            </div>
+            
+            <div class="logo-size-demo">
+                <h3>Medium (56px)</h3>
+                <span class="logo-nodal logo-nodal--md" aria-label="NODAL">
+                    <span class="letter">N</span>
+                    <span class="disc" aria-hidden="true"></span>
+                    <span class="letter">D</span>
+                    <span class="letter">A</span>
+                    <span class="letter">L</span>
+                    <span class="ring" aria-hidden="true"></span>
+                </span>
+            </div>
+            
+            <div class="logo-size-demo">
+                <h3>Large (112px)</h3>
+                <span class="logo-nodal logo-nodal--lg" aria-label="NODAL">
+                    <span class="letter">N</span>
+                    <span class="disc" aria-hidden="true"></span>
+                    <span class="letter">D</span>
+                    <span class="letter">A</span>
+                    <span class="letter">L</span>
+                    <span class="ring" aria-hidden="true"></span>
+                </span>
+            </div>
+        </div>
+        
+        <div style="margin: 40px 0;">
+            <h3>Hero Size (220px) - Like on Homepage</h3>
+            <span class="logo-nodal logo-nodal--2xl" aria-label="NODAL">
+                <span class="letter">N</span>
+                <span class="disc" aria-hidden="true"></span>
+                <span class="letter">D</span>
+                <span class="letter">A</span>
+                <span class="letter">L</span>
+                <span class="ring" aria-hidden="true"></span>
+            </span>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h2>🎬 Animation Features</h2>
+        <p><strong>Hover over any logo</strong> to see the animations:</p>
+        <ul>
+            <li><strong>Lift Effect:</strong> Logo lifts slightly and scales up</li>
+            <li><strong>Enhanced Shadows:</strong> Deeper, more prominent neumorphic shadows</li>
+            <li><strong>Individual Components:</strong> Each letter, disc, and ring animates independently</li>
+            <li><strong>Smooth Transitions:</strong> 0.25s ease transitions for all properties</li>
+            <li><strong>Dark Mode Support:</strong> Toggle dark mode to see different shadow styles</li>
+        </ul>
+        
+        <h2>🎨 Design Details</h2>
+        <p>The logo uses a <strong>neumorphic design</strong> with:</p>
+        <ul>
+            <li>CSS-only implementation (no JavaScript required)</li>
+            <li>Responsive sizing using CSS clamp()</li>
+            <li>Accessibility considerations (respects prefers-reduced-motion)</li>
+            <li>Multi-layer shadow effects for 3D appearance</li>
+            <li>Optimized for both light and dark themes</li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const button = document.querySelector('.theme-toggle');
+            if (document.body.classList.contains('dark')) {
+                button.textContent = '☀️ Toggle Light Mode';
+            } else {
+                button.textContent = '🌙 Toggle Dark Mode';
+            }
+        }
+    </script>
+</body>
+</html>
