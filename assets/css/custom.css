@@ -555,3 +555,13 @@ img[src*="service-"] {
 .dark ol {
     color: #e6e9f2 !important;
 }
+
+/* Homepage Logo Scaling */
+.homepage-logo-container .logo-nodal {
+  font-size: var(--size) !important;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}

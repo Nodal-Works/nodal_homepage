@@ -10,8 +10,8 @@ We are a multidisciplinary urban consultancy combining research, design, and tec
 
   button:
     enable: true
-    label: "Explore Our Work"
-    link: "projects/"
+    label: "Our Process"
+    link: "#scroll-section"
 
 # Features
 features:

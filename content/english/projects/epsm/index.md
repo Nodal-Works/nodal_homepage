@@ -3,6 +3,7 @@ title: "Energy Plus Simulation Manager (EPSM)"
 date: 2025-09-14
 image: "EPSM_hero.png"
 description: "How NODAL developed a custom simulation platform to help researchers at Chalmers University of Technology analyse building energy performance at scale"
+category: "Research Tools"
 ---
 ![EPSM intro animation](EPSM_Banner.gif)
 

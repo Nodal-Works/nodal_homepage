@@ -3,6 +3,7 @@ title: "Parametric Design Tool (PDT)"
 date: 2025-07-23
 image: "PDT_hero.png"
 description: "How NODAL developed the Parametric Design Tool (PDT) for 3ti Energy Hubs—a complete solar design, analysis, and visualisation platform—later acquired by EGG Energy in the UK"
+category: "Solar & Energy"
 ---
 
 ![PDT Hero](PDT_hero.png)
