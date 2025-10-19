@@ -559,6 +559,8 @@ img[src*="service-"] {
 /* Homepage Logo Scaling */
 .homepage-logo-container .logo-nodal {
   font-size: var(--size) !important;
+  --logo-offset-x: 0em; /* Perfect center for homepage, no optical adjustment */
+  transform: translateX(0) !important; /* Override any default offset */
 }
 
 /* Smooth scroll for anchor links */
