@@ -34,7 +34,7 @@
 
 html, body {
   font-family: var(--font-primary) !important;
-  color: #666 !important;  /* Changed from #444 to lighter gray */
+  color: #444 !important;
 }
 
 /* Dark mode text color for readability */
