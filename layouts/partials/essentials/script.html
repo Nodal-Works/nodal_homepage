@@ -34,6 +34,18 @@
   integrity="{{ $scripts.Data.Integrity }}"
   src="{{ $scripts.RelPermalink }}"></script>
 
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+
+
+{{ $ourProcess := resources.Get "js/our-process.js" | js.Build }}
+<script defer src="{{ $ourProcess.RelPermalink }}"></script>
+
+
+{{ $ourProcess := resources.Get "js/our-process.js" | js.Build }}
+<script defer src="{{ $ourProcess.RelPermalink }}"></script>
+
 {{/* scripts lazy */}}
 <script
   defer

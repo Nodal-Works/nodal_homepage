@@ -35,18 +35,6 @@ features:
       label: ""
       link: ""
 
-  - title: "Our Edge"
-    image: "/images/service-3.png"
-    content: "We bring together the experience of working in both academia and industry. Often, complex projects have relied on us as the experts who can bridge the two worlds and deliver results. Large consultancies are valuable but usually heavy and impersonal. Our strength lies in being lean, personal, and responsive, while operating with the competence and reach of a much larger organisation."
-    bulletpoints:
-      - "Bridging academia and industry"
-      - "Lean, personal, and responsive"
-      - "Expert knowledge with agile execution"
-    button:
-      enable: false
-      label: ""
-      link: ""
-
   - title: "What We Offer"
     image: "/images/nodal.png"
     content: "Our services are designed to help urban planners, municipalities, and organizations make data-driven decisions for sustainable urban development."
@@ -56,6 +44,18 @@ features:
       - "Surveys and market research"
       - "Mobility, circular economy, and positive energy districts"
       - "Data expertise across multiple domains"
+    button:
+      enable: false
+      label: ""
+      link: ""
+
+  - title: "Our process"
+    image: "/images/service-3.png"
+    content: "We bring together the experience of working in both academia and industry. Often, complex projects have relied on us as the experts who can bridge the two worlds and deliver results. Large consultancies are valuable but usually heavy and impersonal. Our strength lies in being lean, personal, and responsive, while operating with the competence and reach of a much larger organisation."
+    bulletpoints:
+      - "Bridging academia and industry"
+      - "Lean, personal, and responsive"
+      - "Expert knowledge with agile execution"
     button:
       enable: false
       label: ""

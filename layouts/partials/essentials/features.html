@@ -1,0 +1,50 @@
+{{ range $i, $e := .Params.features }}
+  <section class="section-sm {{ if (modBool $i 2) }}bg-gradient{{ end }}">
+    <div class="container">
+      <div class="row items-center justify-between">
+
+        <!-- Left / Image or Animated Circle -->
+        <div class="mb:md-0 {{ if not (modBool $i 2) }}md:order-2{{ end }} md:col-5 mb-6">
+          {{ if eq $e.title "Our process" }}
+            <!-- Animated Circle replacing image -->
+            {{ partial "sections/our-process.html" $e }}
+          {{ else }}
+            {{ partial "image" (dict 
+              "Src" $e.image 
+              "Alt" $e.title 
+              "DisplayXL" "520x" 
+              "DisplayLG" "425x" 
+              "DisplayMD" "360x") }}
+          {{ end }}
+        </div>
+
+        <!-- Right / Content -->
+        <div class="{{ if not (modBool $i 2) }}md:order-1{{ end }} md:col-7 lg:col-6">
+          <h2 class="mb-4">{{ $e.title | markdownify }}</h2>
+          <p class="mb-8 text-lg">{{ $e.content | markdownify }}</p>
+
+          <!-- Bulletpoints -->
+          <ul>
+            {{ range $e.bulletpoints }}
+              <li class="relative mb-4 pl-6">
+                <i class="fa fa-check absolute left-0 top-1.5"></i>
+                {{ . | markdownify }}
+              </li>
+            {{ end }}
+          </ul>
+
+          <!-- Optional Button -->
+          {{ with $e.button }}
+            {{ if .enable }}
+              <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
+                {{ .label }}
+                <i class="fa fa-arrow-right pl-2"></i>
+              </a>
+            {{ end }}
+          {{ end }}
+
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}
