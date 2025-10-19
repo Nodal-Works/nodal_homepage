@@ -1,34 +1,18 @@
-<footer class="bg-light dark:bg-darkmode-light">
+<footer class="bg-light dark:bg-darkmode-light pb-4">
   <div class="container">
     <div class="row items-center py-6">
       <div class="lg:col-3 mb-4 text-center lg:mb-0 lg:text-left">
         <!-- navbar brand/logo -->
-  <div class="order-0 flex items-center pl-10">
+        <div class="order-0 flex items-center pl-10">
           <a class="navbar-brand inline-flex items-center h-12" href="{{ site.Home.RelPermalink }}">
             <div class="neumorphic-logo" role="img" aria-label="Nodal logo"></div>
           </a>
         </div>
       </div>
       <div class="lg:col-6 mb-4 text-center lg:mb-0">
-        <ul>
-          {{ range site.Menus.footer }}
-            <li class="mx-2 inline-block">
-              <a
-                {{ if findRE `^http` .URL }}
-                  target="_blank" rel="noopener"
-                {{ end }}
-                href="{{ if findRE `^#` .URL }}
-                  {{ if not $.IsHome }}
-                    {{ site.Home.RelPermalink }}
-                  {{ end }}{{ .URL }}
-                {{ else }}
-                  {{ .URL | relLangURL }}
-                {{ end }}"
-                >{{ .Name }}</a
-              >
-            </li>
-          {{ end }}
-        </ul>
+        <p class="mb-0 text-text-light dark:text-darkmode-text-light text-sm">
+          {{ site.Params.copyright | markdownify }}
+        </p>
       </div>
       <div class="lg:col-3 mb-4 text-center lg:mb-0 lg:mt-0 lg:text-right">
         <ul class="social-icons">
@@ -45,14 +29,6 @@
           {{ end }}
         </ul>
       </div>
-    </div>
-  </div>
-  <div class="border-border dark:border-darkmode-border border-t py-4">
-    <div
-      class="text-text-light dark:text-darkmode-text-light container text-center text-sm">
-      <p class="mb-0">
-        {{ site.Params.copyright | markdownify }}
-      </p>
     </div>
   </div>
 </footer>

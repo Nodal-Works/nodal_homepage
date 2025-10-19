@@ -14,15 +14,8 @@ services:
       - "Energy system modelling and optimization"
       - "Mobility and accessibility analysis"
       - "Social equity and impact assessment"
-      
-  - title: "Scenario Building"
-    image: "/images/service-scenario.svg"
-    content: "We help you explore possible futures by developing robust scenarios that account for uncertainty and complexity. Through collaborative workshops and quantitative modelling, we map out pathways that inform strategic planning and policy development."
-    bulletpoints:
-      - "Multi-stakeholder scenario workshops"
-      - "Quantitative modelling and forecasting"
-      - "Pathway analysis and decision trees"
-      - "Policy scenario testing and evaluation"
+
+
 
 
 

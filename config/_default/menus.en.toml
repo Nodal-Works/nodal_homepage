@@ -23,7 +23,4 @@ weight = 6
 
 
 # footer menu
-[[footer]]
-name = "About"
-url = "/about"
-weight = 1
+# (no footer links)
