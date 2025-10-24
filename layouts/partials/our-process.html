@@ -1,61 +1,203 @@
 <style>
+  /* Wrapper */
   .process-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    min-height: 420px;
     margin: 50px 0;
   }
 
+  /* Circle with CSS variables for easy tuning */
   .process-circle {
     position: relative;
-    width: 400px;
-    height: 400px;
+    --circle: 400px;               /* overall diameter */
+    --node: 100px;                 /* node diameter */
+    --radius: calc(var(--circle) / 2);
+    --orbit-speed: 18s;            /* speed of the orbiting dot */
+    --spin-speed: 36s;             /* slow rotating dashed ring */
+    --highlight-duration: 6s;      /* glow duration per node */
+    --bg: #e0e5ec;                 /* neumorphic bg */
+    --shadow-dark: rgba(163, 177, 198, 0.6);
+    --shadow-light: rgba(255, 255, 255, 0.7);
+    --accent: #3498db;             /* highlight color */
+
+    width: var(--circle);
+    height: var(--circle);
     border-radius: 50%;
-    background-color: #e0e5ec;
-    box-shadow: 9px 9px 16px rgb(163, 177, 198, 0.6),
-      -9px -9px 16px rgba(255, 255, 255, 0.5);
+    background-color: var(--bg);
+    box-shadow: 9px 9px 16px var(--shadow-dark),
+      -9px -9px 16px var(--shadow-light);
     display: flex;
     justify-content: center;
     align-items: center;
+    isolation: isolate; /* ensure pseudo elements render beneath nodes nicely */
   }
 
+  /* Entry point: Problem badge and connector arrow into Discovery */
+  .entry-badge {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--radius) - 190px);
+    transform: translateY(-50%);
+    min-width: 140px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: #333;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+    z-index: 2;
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+
+  .entry-connector {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--radius) - 34px);
+    transform: translateY(-50%);
+    width: 160px; /* length from near badge to circle edge */
+    height: 2px;
+    background: linear-gradient(90deg, rgba(52,152,219,0.0) 0%, rgba(52,152,219,0.45) 35%, rgba(52,152,219,0.95) 100%);
+    filter: drop-shadow(0 0 6px rgba(52,152,219,0.35));
+  }
+  .entry-connector::after {
+    content: "";
+    position: absolute;
+    right: -8px; /* arrow head over the circle border */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-left: 10px solid var(--accent);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    filter: drop-shadow(0 0 6px rgba(52,152,219,0.35));
+  }
+
+  /* Slow rotating dashed ring inside the circle */
+  .process-circle::before {
+    content: "";
+    position: absolute;
+    inset: 22px;
+    border-radius: 50%;
+    border: 2px dashed rgba(120, 130, 150, 0.35);
+    animation: spin var(--spin-speed) linear infinite;
+  }
+
+  /* Orbiting highlight dot */
+  .process-circle .orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffffff, var(--accent));
+    box-shadow: 0 0 12px rgba(52, 152, 219, 0.6), 2px 2px 6px var(--shadow-dark);
+    transform: translate(-50%, -50%) rotate(0deg) translate(calc(var(--radius) - 12px));
+    animation: orbit var(--orbit-speed) linear infinite;
+    z-index: 1;
+  }
+
+  /* Nodes */
   .process-node {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100px;
-    height: 100px;
-    background-color: #e0e5ec;
+    width: var(--node);
+    height: var(--node);
+    background-color: var(--bg);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 10px;
+    line-height: 1.1;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
     color: #555;
-    box-shadow: 5px 5px 10px rgba(163, 177, 198, 0.6),
-      -5px -5px 10px rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    transition: box-shadow 0.25s ease;
+    animation: pop-in 700ms ease-out both;
+  }
+
+  .process-node::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(52, 152, 219, 0);
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    animation: highlight var(--highlight-duration) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    pointer-events: none;
   }
 
   .process-node:hover {
-    box-shadow: inset 5px 5px 10px rgba(163, 177, 198, 0.6),
-      inset -5px -5px 10px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
   }
 
-  /* Positioning the nodes */
-  .node-1 { transform: translate(-50%, -50%) rotate(0deg) translate(200px) rotate(0deg); }
-  .node-2 { transform: translate(-50%, -50%) rotate(72deg) translate(200px) rotate(-72deg); }
-  .node-3 { transform: translate(-50%, -50%) rotate(144deg) translate(200px) rotate(-144deg); }
-  .node-4 { transform: translate(-50%, -50%) rotate(216deg) translate(200px) rotate(-216deg); }
-  .node-5 { transform: translate(-50%, -50%) rotate(288deg) translate(200px) rotate(-288deg); }
+  /* Positioning the nodes around the circle */
+  .node-1 { --delay: 0s;    transform: translate(-50%, -50%) rotate(0deg) translate(var(--radius)) rotate(0deg); }
+  .node-2 { --delay: 1.2s;  transform: translate(-50%, -50%) rotate(72deg) translate(var(--radius)) rotate(-72deg); }
+  .node-3 { --delay: 2.4s;  transform: translate(-50%, -50%) rotate(144deg) translate(var(--radius)) rotate(-144deg); }
+  .node-4 { --delay: 3.6s;  transform: translate(-50%, -50%) rotate(216deg) translate(var(--radius)) rotate(-216deg); }
+  .node-5 { --delay: 4.8s;  transform: translate(-50%, -50%) rotate(288deg) translate(var(--radius)) rotate(-288deg); }
 
+  /* Animations */
+  @keyframes orbit {
+    to { transform: translate(-50%, -50%) rotate(360deg) translate(calc(var(--radius) - 12px)); }
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @keyframes pop-in {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+    100% { opacity: 1; transform: translate(-50%, -50%); }
+  }
+
+  @keyframes highlight {
+    0%, 65%, 100% { border-color: rgba(52, 152, 219, 0); box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+    10%, 30% { border-color: rgba(52, 152, 219, 0.35); box-shadow: 0 0 0 8px rgba(52, 152, 219, 0.18); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); }
+    50% { box-shadow: 8px 8px 18px var(--shadow-dark), -8px -8px 18px var(--shadow-light); }
+  }
+
+  /* Responsive sizing */
+  @media (max-width: 1024px) {
+    .process-circle { --circle: 320px; --node: 88px; }
+    .process-node { font-size: 13px; }
+    .entry-badge { left: calc(50% - var(--radius) - 170px); min-width: 128px; font-size: 13px; }
+    .entry-connector { left: calc(50% - var(--radius) - 28px); width: 130px; }
+  }
+  @media (max-width: 640px) {
+    .process-circle { --circle: 260px; --node: 76px; }
+    .process-node { font-size: 12px; padding: 8px; }
+    .entry-badge { left: calc(50% - var(--radius) - 150px); min-width: 120px; padding: 8px 12px; font-size: 12px; }
+    .entry-connector { left: calc(50% - var(--radius) - 24px); width: 110px; }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .process-circle::before,
+    .process-circle .orbit,
+    .process-node,
+    .process-node::after { animation: none !important; }
+    .entry-badge { animation: none !important; }
+  }
 </style>
 
 <div class="process-container">
   <div class="process-circle">
+    <div class="entry-badge" aria-label="Problem entry">Problem</div>
+    <div class="entry-connector" aria-hidden="true"></div>
+    <div class="orbit"></div>
     <div class="process-node node-1">Discovery</div>
     <div class="process-node node-2">Research</div>
     <div class="process-node node-3">IDEATE</div>
