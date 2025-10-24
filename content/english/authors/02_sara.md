@@ -6,11 +6,11 @@ description: Specialist in Positive Energy Districts, energy communities, and di
 social:
   - name: github
     icon: fa-brands fa-github
-    link: https://github.com
+    link: https://github.com/SaraAboebeid
 
   - name: linkedin
     icon: fa-brands fa-linkedin
-    link: https://linkedin.com
+    link: https://www.linkedin.com/in/sara-abouebeidsomanath/
 ---
 
 

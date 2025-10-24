@@ -7,7 +7,7 @@ draft: false
 # Services
 services:
   - title: "Analytics"
-    image: "/images/service-analytics.svg"
+    image: "/images/analytics-removebg-preview.png"
     content: "We transform raw data into actionable insights through rigorous analysis. Our analytical capabilities span spatial data, urban systems, energy performance, mobility patterns, and social equity metrics—all grounded in evidence-based methods."
     bulletpoints:
       - "Urban spatial analysis and GIS"
@@ -17,10 +17,8 @@ services:
 
 
 
-
-
   - title: "Digitalisation Strategy"
-    image: "/images/service-digital.svg"
+    image: "/images/digitalisation-removebg-preview.png"
     content: "We guide organizations through digital transformation by developing clear, actionable strategies that align technology with mission. Our approach ensures that digitalisation strengthens capacity and serves people-centered goals."
     bulletpoints:
       - "Digital transformation roadmaps"
@@ -29,7 +27,7 @@ services:
       - "Organizational capacity building"
 
   - title: "Dashboards and Visualisation"
-    image: "/images/service-dashboard.svg"
+    image: "/images/dashboard-removebg-preview.png"
     content: "We design and build interactive dashboards and visualization tools that make complex information accessible. Our interfaces empower decision-makers to explore data, monitor progress, and communicate findings effectively."
     bulletpoints:
       - "Interactive web-based dashboards"
@@ -38,7 +36,7 @@ services:
       - "Performance tracking and reporting tools"
 
   - title: "Training"
-    image: "/images/service-training.svg"
+    image: "/images/training-removebg-preview.png"
     content: "We build lasting capacity within organizations through hands-on training in data science, GIS, simulation tools, and analytical methods. Our training is practical, tailored to real workflows, and designed to empower teams to work independently."
     bulletpoints:
       - "Data science and Python programming"

@@ -1,3 +1,55 @@
+/* NODAL logo opening animation: emerge from background */
+.logo-nodal--emerge {
+  /* Quick fade so logo is visible immediately + a longer smooth blur/color reveal */
+  animation: logoEmerge 0.8s cubic-bezier(.4,0,.2,1) 0s both;
+  opacity: 1;
+  filter: blur(1em) brightness(1.15);
+  color: var(--bg);
+  will-change: filter, color;
+}
+
+@keyframes logoFade {
+  /* Removed: logoFade is no longer used for logo-nodal--emerge */
+}
+
+@keyframes logoEmerge {
+  0%   { filter: blur(1em) brightness(1.15); color: var(--bg); }
+  40%  { filter: blur(0.4em) brightness(1.07); color: var(--bg); }
+  70%  { filter: blur(0.15em) brightness(1.02); color: var(--bg); }
+  100% { filter: blur(0) brightness(1); color: var(--text); }
+}
+.logo-nodal--emerge .letter,
+.logo-nodal--emerge .disc,
+.logo-nodal--emerge .ring {
+  /* fade children with the container, then reveal shadows smoothly */
+  animation: logoFade 0.05s ease-out 0.2s both, logoShadow 3.2s ease 0.15s both;
+}
+
+@keyframes logoShadow {
+  0% {
+    text-shadow: none !important;
+    box-shadow: none !important;
+    filter: blur(0.6em) brightness(1.08);
+  }
+  60% {
+    text-shadow: none !important;
+    box-shadow: none !important;
+    filter: blur(0.18em) brightness(1.03);
+  }
+  100% {
+    text-shadow:
+      -0.03em -0.03em 0.05em rgba(255,255,255,.55),
+       0.035em  0.035em 0.04em rgba(100,110,125,.24),
+       0        0        .65em rgba(255,255,255,.22) !important;
+    box-shadow:
+      -0.03em -0.03em 0.05em rgba(255,255,255,.55),
+       0.035em 0.035em 0.04em rgba(100,110,125,.24),
+       0 0 .65em rgba(255,255,255,.22),
+      inset -0.02em -0.02em 0.06em rgba(255,255,255,0.35),
+      inset 0.04em 0.04em 0.06em rgba(0,0,0,0.01) !important;
+    filter: none;
+  }
+}
 /* Site-wide font configuration */
 :root {
   /* Use the original font stack that was intended for the site */

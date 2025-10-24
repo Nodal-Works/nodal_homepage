@@ -6,11 +6,11 @@ description: Postdoctoral researcher at Chalmers University of Technology, speci
 social:
   - name: github
     icon: fa-brands fa-github
-    link: https://github.com/maki-jota
+    link: https://github.com/makijota
 
   - name: linkedin
     icon: fa-brands fa-linkedin
-    link: https://linkedin.com/in/jonathan-cohen
+    link: https://www.linkedin.com/in/phd-cohen-urban-data/
 ---
 
 
