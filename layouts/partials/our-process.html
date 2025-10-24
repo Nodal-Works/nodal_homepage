@@ -1,0 +1,65 @@
+<style>
+  .process-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    margin: 50px 0;
+  }
+
+  .process-circle {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: #e0e5ec;
+    box-shadow: 9px 9px 16px rgb(163, 177, 198, 0.6),
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .process-node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: #e0e5ec;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    box-shadow: 5px 5px 10px rgba(163, 177, 198, 0.6),
+      -5px -5px 10px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .process-node:hover {
+    box-shadow: inset 5px 5px 10px rgba(163, 177, 198, 0.6),
+      inset -5px -5px 10px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Positioning the nodes */
+  .node-1 { transform: translate(-50%, -50%) rotate(0deg) translate(200px) rotate(0deg); }
+  .node-2 { transform: translate(-50%, -50%) rotate(72deg) translate(200px) rotate(-72deg); }
+  .node-3 { transform: translate(-50%, -50%) rotate(144deg) translate(200px) rotate(-144deg); }
+  .node-4 { transform: translate(-50%, -50%) rotate(216deg) translate(200px) rotate(-216deg); }
+  .node-5 { transform: translate(-50%, -50%) rotate(288deg) translate(200px) rotate(-288deg); }
+
+</style>
+
+<div class="process-container">
+  <div class="process-circle">
+    <div class="process-node node-1">Discovery</div>
+    <div class="process-node node-2">Research</div>
+    <div class="process-node node-3">IDEATE</div>
+    <div class="process-node node-4">Prototyping</div>
+    <div class="process-node node-5">Testing</div>
+  </div>
+</div>
