@@ -1,7 +1,7 @@
 ---
 title: "Growth of the Metropolitan Region of Buenos Aires through Satellite Image Analysis"
-date: 2020-05-10
-image: "satellite_hero.png"
+date: 2020-07-10
+image: "satelite_hero.png"
 description: "A comprehensive territorial analysis using satellite imagery and GIS to quantify urban expansion patterns in the Buenos Aires Metropolitan Region from 1990-2010"
 category: "Urban Analytics & Satellite Remote Sensing"
 ---
@@ -20,196 +20,245 @@ This research addresses these gaps through a comprehensive satellite imagery ana
 
 ## Research Methodology
 
-### Spatial Grid Framework
+### Institutional Framework and Data Sources
 
-We implemented a systematic grid-based approach to partition each urban area into standardized spatial units. For each city, we:
+Since 2010, the **Center for Urban and Housing Policies (CIPUV)**, with support from the **World Bank** and the **Lincoln Institute of Land Policy (LILP)**, has systematically acquired satellite imagery across Argentina. This comprehensive dataset includes:
 
-1. **Defined urban study boundaries** using official European urban morphological zones
-2. **Generated systematic grid cells** (1km² for Lisbon using ETRS89 LAEA projection; varying sizes for other cities)
-3. **Computed grid centroids** as representative points for origin-destination analysis
-4. **Created comprehensive OD matrices** with all possible grid-to-grid combinations
+- **Temporal Coverage**: Satellite images for **1990, 2000, and 2010**
+- **Geographic Scope**: More than **100 municipalities** across Argentina
+- **Data Source**: **Landsat 5** imagery with **30m² pixel resolution**
+- **Processing Framework**: Advanced **Geographic Information Systems (GIS)** analysis
 
-
-<div style="text-align: center;">
-<img src="GBG.png" width="50%" alt="Example of spatial grid overlay on urban area" style="display: block; margin: 0 auto;">
-<p><em>Figure 1: Systematic grid-based spatial partitioning methodology applied to urban study area</em></p>
-</div>
-
-### Travel Time Data Collection
-
-We employed the **Google Distance Matrix API** to collect empirical travel time data under varying traffic conditions:
-
-- **Traffic Scenarios**: Three distinct traffic models were queried:
-  - **Pessimistic scenario**: Morning rush hour (8:30 AM on Wednesday, March 15, 2018) - captures peak congestion
-  - **Best guess scenario**: Current traffic conditions - represents typical conditions
-  - **Optimistic scenario**: Free-flow conditions (4:00 AM on Sunday, July 15, 2018) - minimal traffic baseline
-
-- **OD Matrix Queries**: For each grid-to-grid pair, we collected:
-  - Network distance (meters)
-  - Travel duration without traffic (seconds)
-  - Travel duration in traffic (seconds)
-  - Implied average speed
-
-### Congestion Index Calculation
-
-We computed the **Travel Time Index (TTI)** as our primary congestion metric:
-
-<div style="text-align: center; font-size: 1.2em; margin: 1.5em 0;">
-<strong>TTI = t<sub>congested</sub> / t<sub>free-flow</sub></strong>
-</div>
-
-Where:
-- **t<sub>congested</sub>** = travel time during peak congestion (pessimistic scenario)
-- **t<sub>free-flow</sub>** = travel time under optimal conditions (optimistic scenario)
-
-A TTI of 1.5 indicates that a trip takes 50% longer during congestion compared to free-flow conditions.
-
-Below is the step by step method.
+The methodology follows the theoretical framework developed by **Dr. Angel Shlomo**, providing a standardized approach for quantifying urban areas and expansion patterns.
 
 <div style="text-align: center;">
-<img src="method.png" width="90%" alt="Methodology followed in the research" style="display: block; margin: 0 auto;">
-<p><em>Figure 2: Spatial distribution of Travel Time Index (TTI) showing congestion hotspots and patterns across urban areas</em></p>
+<img src="panel_a_raw.png" width="70%" alt="Unprocessed satellite image showing raw Landsat data" style="display: block; margin: 0 auto;">
+<p><em>Figure 1: Raw satellite imagery before classification processing</em></p>
 </div>
 
-### Technical Architecture
+### Two-Phase Classification Methodology
 
-```text
-      ┌─────────────────────────────────────────────────────────────┐
-      │                    DATA PIPELINE                            │
-      ├─────────────────────────────────────────────────────────────┤
-      │                                                             │
-      │  Spatial Grid       Google Distance      Congestion         │
-      │  Generation    -->  Matrix API      -->  Index              │
-      │  (R/rgdal)          Queries              Calculation        │
-      │                     (XML parsing)        (TTI, speed)       │
-      │                                                             │
-      └─────────────────────────────────────────────────────────────┘
+The image processing methodology is structured in two complementary phases that transform raw satellite data into meaningful urban analysis:
 
-      ┌─────────────────────────────────────────────────────────────┐
-      │                  ANALYTICAL WORKFLOW                        │
-      ├─────────────────────────────────────────────────────────────┤
-      │                                                             │
-      │  1. load_n_centroid()    - Create spatial grid centroids    │
-      │  2. create_mat_od()      - Generate OD matrix               │
-      │  3. data_build()         - Query Google API (3 scenarios)   │
-      │  4. clean_1st()          - Data cleaning & speed calc       │
-      │  5. aggregation()        - Spatial aggregation by origin    │ 
-      │  6. aggrergate_n_merge() - Merge with spatial geometries    │
-      │  7. end_of_aggregation() - Compute final TTI metrics        │
-      │                                                             │
-      └─────────────────────────────────────────────────────────────┘
-```
+#### Phase 1: Initial Pixel Classification
 
-**Key Implementation Components:**
+Each pixel in the satellite images undergoes initial classification into three fundamental categories:
 
-- **R Scripts**: `Congestion_Index.R` - Core analytical functions
-- **Execution Pipeline**: `Excecution.R` - City-specific processing workflows  
-- **Visualization**: `graphs.R`, `tables.R` - Publication-quality outputs
-- **Geospatial Libraries**: rgdal, sp, sf, mapview, leaflet
-- **Data Processing**: dplyr, tidyr for data manipulation
+1. **Built-up areas**: Developed land with construction and infrastructure
+2. **Unbuilt or permeable land**: Natural vegetation, agriculture, and open spaces
+3. **Water**: Rivers, lakes, and water bodies
+
+This initial classification provides the foundation for more sophisticated contextual analysis, with each **30m² pixel** representing a discrete analytical unit.
+
+<div style="text-align: center;">
+<img src="panel_b_classified.png" width="70%" alt="Classified satellite image showing initial three-category classification" style="display: block; margin: 0 auto;">
+<p><em>Figure 2: Satellite image after initial three-category pixel classification</em></p>
+</div>
+
+#### Phase 2: Contextual Reclassification
+
+The second phase applies sophisticated contextual analysis to refine the initial classification. Each pixel is reclassified based on its surrounding environment, with neighboring pixels defined as those within **walkable distance** (1 km² radius).
+
+**Built-up Area Classification:**
+- **Urban built-up**: 50% or more of neighboring pixels are built-up
+- **Suburban built-up**: Between 10% and 50% of neighbors are built-up  
+- **Rural built-up**: Less than 10% of neighbors are built-up
+
+**Open Space Classification:**
+- **Urban open spaces**: 50% of neighboring pixels are built-up
+- **Captured open land**: Open areas (≤ 2 km²) completely surrounded by built-up or urban open pixels
+- **Rural open spaces**: Less than 10% of neighboring pixels are built-up
+
+<div style="text-align: center;">
+<img src="figure1_contextual.png" width="80%" alt="Contextual reclassification methodology diagram" style="display: block; margin: 0 auto;">
+<p><em>Figure 3: Phase 2 contextual reclassification based on neighborhood analysis</em></p>
+</div>
+
+### Urban Footprint Definition
+
+The **urban footprint (mancha urbana)** represents the total area affected by urban development, combining built-up pixels with open spaces influenced by urban proximity:
+
+**Components of Urban Footprint:**
+- **Built-up pixels**: All classified construction areas
+- **Fringe open spaces**: Pixels within 100 meters of urban or suburban areas
+- **Captured pixels**: Open spaces ≤ 2 km² entirely surrounded by built-up or fringe pixels
+- **Rural open spaces**: Remaining unaffected open areas
+
+<div style="text-align: center;">
+<img src="figure2_urban_area.png" width="80%" alt="Urban footprint analysis methodology" style="display: block; margin: 0 auto;">
+<p><em>Figure 4: Urban footprint analysis showing the relationship between built-up areas and affected open spaces</em></p>
+</div>
+
+### Study Area: Metropolitan Region of Buenos Aires (RMBA)
+
+According to **Decree 656/94**, the **Metropolitan Region of Buenos Aires (RMBA)** comprises the **City of Buenos Aires (CABA)** and **42 surrounding municipalities (partidos)**. This research focuses on **CABA and 30 key municipalities** where over **90% of the region's population** resides, forming a continuous urban fabric.
+
+**Regional Specifications:**
+- **Total Study Area**: 613,349 hectares (6,133 km²)
+- **Population**: Over 13 million inhabitants
+- **Administrative Structure**: 31 jurisdictions (CABA + 30 municipalities)
+- **Geographic Scope**: Continuous metropolitan area with highest development density
+
+**Included Municipalities**: Vicente López, San Isidro, General San Martín, Tres de Febrero, Hurlingham, Ituzaingó, Morón, La Matanza, Lomas de Zamora, Lanús, Quilmes, Almirante Brown, Esteban Echeverría, Ezeiza, Merlo, Moreno, San Miguel, José C. Paz, Malvinas Argentinas, San Fernando, Tigre, Escobar, Pilar, Presidente Perón, Florencio Varela, Berazategui, Avellaneda, Marcos Paz, Cañuelas, General Rodríguez, San Vicente, and the City of Buenos Aires.
+
+**Analytical Framework**: The study area is organized into **metropolitan zones (coronas)** to facilitate comparative analysis:
+
+- **CABA**: Central city core
+- **1st Ring**: Inner suburban municipalities with high development density
+- **2nd Ring**: Middle suburban areas experiencing rapid growth
+- **3rd Ring**: Outer suburban and peri-urban areas with emerging development
+
+<div style="text-align: center;">
+<img src="map1_rmba_zones.png" width="85%" alt="Metropolitan Region of Buenos Aires study area organized by zones" style="display: block; margin: 0 auto;">
+<p><em>Figure 5: Metropolitan Region of Buenos Aires study area showing zonal organization (coronas) for comparative analysis</em></p>
+</div>
 
 ---
 
 ## Results & Findings
 
-### Spatial Congestion Patterns
+### Metropolitan Urban Expansion Analysis
 
-Our analysis revealed distinct spatial heterogeneity in traffic congestion across all four cities:
+The satellite imagery analysis revealed dramatic urban expansion across the Buenos Aires Metropolitan Region between 1990 and 2010, with significant implications for regional planning and infrastructure development.
 
-<div style="text-align: center;">
-<img src="TTI_ALL.png" width="90%" alt="Travel Time Index spatial distribution across study cities" style="display: block; margin: 0 auto;">
-<p><em>Figure 3: Spatial distribution of Travel Time Index (TTI) showing congestion hotspots and patterns across urban areas</em></p>
-</div>
+**Overall Growth Metrics:**
 
-**Key Spatial Findings:**
+| Year | Built-up Area (km²) | % of Total Region | Growth Rate |
+|------|---------------------|-------------------|-------------|
+| 1990 | 1,070               | 17%               | —           |
+| 2000 | 1,237               | 20%               | +16%        |
+| 2010 | 1,712               | 28%               | +38%        |
 
-1. **City Centers**: Consistently exhibited highest TTI values (>1.5), indicating severe congestion during peak periods
-2. **Suburban Areas**: Generally showed lower congestion (TTI 1.1-1.3) with better free-flow conditions
-3. **Radial Patterns**: Congestion intensified along major arterial corridors connecting periphery to center
-4. **Hotspot Clustering**: Specific neighborhoods showed persistent congestion regardless of traffic scenario
-
-### Comparative City Analysis
-
+Between 1990 and 2010, the **urbanized area increased by 60%**, while rural undeveloped land decreased from **4,847 km² to 4,137 km²**—a loss of **710 km² of rural territory** to urban development.
 
 <div style="text-align: center;">
-<img src="compare_tti.png" width="85%" alt="Comparative congestion metrics across the four cities" style="display: block; margin: 0 auto;">
-<p><em>Figure 4: Comparative analysis of congestion intensity and spatial extent across Lisbon, Göteborg, Amsterdam, and Glasgow</em></p>
+<img src="urban_expansion_overview.png" width="90%" alt="Urban expansion overview showing growth from 1990 to 2010" style="display: block; margin: 0 auto;">
+<p><em>Figure 6: Metropolitan urban expansion overview showing built-up area growth across three decades</em></p>
 </div>
 
-**Inter-City Comparisons:**
+### Development Pattern Analysis
 
-- **Lisbon**: Exhibited highest average TTI with extensive congestion coverage
-- **Amsterdam**: Moderate congestion but highly concentrated in canal district
-- **Göteborg**: Lower overall congestion with localized bottlenecks
-- **Glasgow**: Variable patterns with corridor-specific congestion
+The analysis identified three distinct **development patterns** characterizing metropolitan growth:
 
-### Temporal Variability
+**Development Type Distribution:**
 
-Analysis of the three traffic scenarios revealed:
+| Year | Urban (%) | Suburban (%) | Rural (%) |
+|------|-----------|--------------|-----------|
+| 1990 | 83        | 15           | 1         |
+| 2000 | 85        | 14           | 1         |
+| 2010 | 85        | 13           | 1         |
 
-<div style="text-align: center; font-size: 1.2em; margin: 1.5em 0;">
-<strong>Δt = t<sub>pessimistic</sub> - t<sub>optimistic</sub></strong>
-</div>
+**Urban development** consistently dominated, representing over **80% of all built-up areas** throughout the study period, indicating **compact development patterns** rather than dispersed suburban sprawl.
 
-**Average Time Differences (minutes):**
-- Short trips (<5km): +8-12 minutes during congestion
-- Medium trips (5-15km): +15-25 minutes during congestion  
-- Long trips (>15km): +30-45 minutes during congestion
+### Green Space and Environmental Impact Analysis
 
+Urban expansion significantly affected **green spaces and environmental resources** across the metropolitan region:
+
+**Urban Green Space Evolution:**
+
+| Year | Green Spaces (km²) | % of Built-up Area | Change |
+|------|--------------------|--------------------|--------|
+| 1990 | 202                | 19%                | —      |
+| 2000 | 225                | 18%                | +11%   |
+| 2010 | 260                | 15%                | +16%   |
+
+While total green space area increased by **58 km²**, the **proportional coverage declined from 19% to 15%** of built-up areas, indicating that **urban densification outpaced green space preservation**.
 
 <div style="text-align: center;">
-<img src="density.png" width="75%" alt="Distribution of congestion-induced travel time delays" style="display: block; margin: 0 auto;">
-<p><em>Figure 5: Distribution of additional travel time during peak congestion compared to free-flow conditions</em></p>
+<img src="green_space_analysis.png" width="85%" alt="Green space evolution and proportional changes over time" style="display: block; margin: 0 auto;">
+<p><em>Figure 7: Green space evolution showing absolute growth but proportional decline relative to urban development</em></p>
 </div>
 
-### Speed Reduction Analysis
+**Environmental Implications:**
 
-Average travel speeds showed significant reductions during congested periods:
+- **Rural Land Loss**: 710 km² of rural territory converted to urban use
+- **Urban Footprint Expansion**: Affected land increased from 555 km² (1990) to 830 km² (2010)
+- **Fringe Area Impact**: 92% of affected land consistently classified as fringe areas throughout study period
 
-- **Free-flow conditions**: 40-65 km/h (depending on road network)
-- **Peak congestion**: 15-30 km/h  
-- **Speed reduction**: 50-70% during rush hours
+### Development Pattern Analysis by Metropolitan Zone
+
+The analysis revealed **distinct growth patterns** across different metropolitan zones (coronas), with implications for infrastructure planning and service delivery:
+
+**Zonal Development Distribution:**
+
+| Metropolitan Zone | Total Surface (km²) | % of RMBA Total | Primary Characteristics |
+|-------------------|---------------------|-----------------|-------------------------|
+| **CABA**          | 204                 | 3%              | Central core, limited expansion |
+| **1st Ring**      | 759                 | 12%             | Highly consolidated, mature development |
+| **2nd Ring**      | 1,806               | 29%             | Rapid growth, suburban expansion |
+| **3rd Ring**      | 3,365               | 55%             | Emerging development, highest growth rates |
+
+**Key Zonal Findings:**
+
+- **CABA**: Built-up area increased from **83% to 91%**, indicating intensive urban consolidation within limited boundaries
+- **1st Ring**: Highly consolidated with **minor expansion** due to development saturation
+- **2nd Ring**: Experienced **61% growth between 2000–2010**, representing major suburban development
+- **3rd Ring**: Demonstrated **170% growth**, surpassing CABA's total built-up area by 2010
+
+<div style="text-align: center;">
+<img src="zonal_growth_comparison.png" width="85%" alt="Comparative growth analysis across metropolitan zones" style="display: block; margin: 0 auto;">
+<p><em>Figure 8: Comparative growth analysis showing development intensity across metropolitan zones (coronas)</em></p>
+</div>
+
+### New Development Patterns and Growth Types
+
+Analysis of **new development between decades** revealed evolving urban expansion strategies:
+
+**New Development Analysis:**
+
+| Period     | New Surface (km²) | Growth Rate | Infill (%) | Extension (%) | Leapfrog (%) |
+|------------|------------------|-------------|------------|---------------|--------------|
+| 1990–2000  | 167              | —           | 34         | 60            | 6            |
+| 2000–2010  | 478              | +187%       | 30         | 53            | 17           |
+
+**Development Pattern Evolution:**
+- **Extension development** (contiguous growth) dominated both periods but decreased from 60% to 53%
+- **Leapfrog development** (disconnected growth) **tripled** from 6% to 17%, indicating increasing urban fragmentation
+- **Infill development** remained stable around 30-34%, suggesting consistent urban consolidation efforts
 
 ---
 
 ## Technical Innovation
 
-### Scalable Geospatial Framework
+### Satellite Image Processing Pipeline
 
-We developed a modular R-based analytical pipeline that:
+The project implemented sophisticated **remote sensing analysis** combining multiple computational approaches for large-scale territorial analysis:
 
-- **Handles large-scale OD matrices**: Efficiently processes tens of thousands of origin-destination pairs
-- **Integrates multiple APIs**: Google Distance Matrix (legacy) with TomTom migration path
-- **Supports multiple cities**: Parameterized functions adapt to different coordinate systems and grid sizes
-- **Produces publication-ready outputs**: Automated generation of maps, charts, and statistical summaries
+**Technical Architecture:**
+- **Landsat 5 Processing**: 30m² pixel resolution analysis across multiple temporal periods
+- **Multi-temporal Analysis**: Comparative assessment across 1990, 2000, and 2010
+- **Contextual Classification**: Advanced neighborhood analysis using 1km² radius calculations
+- **Spatial Database Integration**: Comprehensive GIS framework for metropolitan-scale processing
 
-### Data Quality & Validation
+**Methodological Innovations:**
+- **Dr. Angel Shlomo's Framework**: Implementation of established international methodology adapted for Argentine context
+- **Two-Phase Classification**: Initial pixel classification followed by contextual reclassification
+- **Metropolitan Zoning**: Strategic spatial organization enabling comparative analysis across urban rings
+- **Multi-Scale Analysis**: Integration of pixel-level detail with regional-scale patterns
 
-- **Error handling**: Robust try-catch blocks for API failures
-- **Data cleaning**: Removal of invalid routes and zero-distance pairs
-- **Outlier detection**: Statistical filtering of anomalous travel times
-- **Cross-validation**: Comparison with ground-truth traffic data where available
+### Spatial Evolution Visualization
 
-### Visualization Pipeline
+The project developed comprehensive **visualization capabilities** for communicating complex territorial changes:
 
-The project implements sophisticated visualization capabilities:
+<div style="text-align: center;">
+<img src="urban_evolution_maps.png" width="90%" alt="Spatial evolution maps showing urban development across three decades" style="display: block; margin: 0 auto;">
+<p><em>Figure 9: Comprehensive spatial evolution visualization showing urban area development from 1990 to 2010</em></p>
+</div>
 
-```r
-# Automated map generation for all metrics
-export_maps_n_graphs(city_data, 
-                     city_name = 'Lisbon',
-                     city_best, 
-                     city_worst)
+**Visualization Outputs:**
+- **Temporal Map Series**: Urban area evolution across three decades
+- **Urban Footprint Analysis**: Comprehensive affected area visualization
+- **Development Pattern Maps**: Spatial representation of infill, extension, and leapfrog growth
+- **Comparative Zonal Analysis**: Metropolitan ring development comparison
+- **Green Space Evolution**: Environmental impact visualization
 
-# Interactive leaflet maps with custom color schemes
-mapview(lisbon, zcol = "tti")
-```
+### Data Integration and Validation
 
-Generates:
-- **Choropleth maps**: TTI, travel time differences, speed reductions
-- **Distribution plots**: Histograms and density curves for congestion metrics
-- **Scatter visualizations**: Distance vs. travel time relationships
-- **Comparative charts**: Multi-city statistical comparisons
+**Multi-Source Integration:**
+- **CIPUV Database**: Over 100 municipalities with standardized imagery
+- **World Bank Partnership**: International development institution collaboration
+- **Lincoln Institute Support**: Academic validation and methodological oversight
+- **INDEC Integration**: National statistical institute data harmonization
 
 ---
 
@@ -217,97 +266,108 @@ Generates:
 
 ### Academic Contributions
 
-This research demonstrates a **replicable methodology for fine-grained urban congestion analysis** that can be applied to any city with road network data. The spatial grid approach enables:
+This research demonstrates **innovative application of satellite remote sensing** for comprehensive metropolitan analysis, contributing to urban studies and territorial planning methodologies:
 
-- **Neighborhood-level insights**: Beyond traditional corridor or city-wide metrics
-- **Comparative urban analytics**: Standardized framework for cross-city studies
-- **Policy-relevant evidence**: Spatially explicit data for targeted interventions
+**Methodological Advances:**
+- **Multi-temporal Analysis**: Systematic 20-year development pattern assessment
+- **Contextual Classification**: Advanced neighborhood-based pixel reclassification methodology
+- **Metropolitan Scaling**: Framework adaptable from municipal to regional analysis
+- **Development Pattern Typology**: Quantitative identification of infill, extension, and leapfrog development
+
+**Scientific Contributions:**
+- **Open-source Methodology**: Replicable framework for satellite-based urban analysis
+- **Latin American Context**: Adaptation of international methodology to regional development patterns
+- **Policy-relevant Metrics**: Quantitative indicators directly applicable to planning decisions
+- **Environmental Assessment**: Integrated analysis of green space and rural land impacts
 
 ### Applications for Urban Planning
 
-**Transportation Planners** can use these methods to:
-- Identify specific zones requiring congestion mitigation
-- Evaluate the spatial extent of infrastructure improvements
-- Prioritize public transit investments in high-congestion areas
-- Assess equity implications of congestion burdens across neighborhoods
+**Metropolitan Planners** can leverage these insights to:
+- **Infrastructure Investment**: Prioritize service delivery based on growth pattern analysis
+- **Green Space Planning**: Design preservation strategies informed by proportional decline trends
+- **Zonal Development Policy**: Implement differentiated strategies for each metropolitan ring
+- **Growth Management**: Balance infill densification with extension control policies
 
 **Policy Makers** gain:
-- Evidence-based justification for congestion pricing zones
-- Spatial targeting for intelligent transportation systems
-- Data-driven evaluation of urban development impacts on traffic
+- **Evidence-based Zoning**: Spatial data supporting metropolitan land use regulations
+- **Environmental Protection**: Quantitative assessment of rural land conversion impacts
+- **Investment Prioritization**: Growth pattern data informing infrastructure budget allocation
+- **Regional Coordination**: Inter-municipal planning supported by comprehensive territorial data
 
-### Methodological Advances
+### International Collaboration and Institutional Impact
 
-- **Open-source implementation**: All code available for reproduction and extension
-- **API-agnostic design**: Adaptable to different routing service providers (Google, TomTom, HERE, etc.)
-- **Modular architecture**: Individual components can be modified or replaced
-- **Scalability**: Framework tested on cities ranging from 500,000 to 3+ million inhabitants
+This research exemplifies **successful international collaboration** in urban development analysis, demonstrating how satellite technology can support evidence-based territorial planning:
 
-### Real-World Application: Latin America Transportation Investment Analysis
+**Institutional Partnership Framework:**
+- **Center for Urban and Housing Policies (CIPUV)**: Argentine research institution providing technical expertise
+- **World Bank**: International development finance institution supporting data acquisition
+- **Lincoln Institute of Land Policy (LILP)**: Academic institution providing methodological validation
+- **Dr. Angel Shlomo's Methodology**: International theoretical framework adapted to Latin American context
 
-The methodology developed in this research was successfully adapted and deployed for **strategic transportation investment analysis** in collaboration with the **Inter-American Development Bank (IDB)**. This application demonstrated the framework's versatility beyond urban congestion mapping:
+**Broader Applications:**
+The methodology has been **replicated across over 100 Argentine municipalities**, demonstrating scalability from metropolitan to national territorial analysis. This framework provides:
 
-**Strategic Adaptation for Regional Analysis:**
-- **Scale Transition**: From city-grid analysis to country/regional-level strategic planning
-- **Point Selection**: Instead of systematic grid centroids, **strategic logistic points** were selected across national transportation networks
-- **Investment Focus**: Analysis targeted potential transportation infrastructure investments with regional economic impact
-- **Multi-Modal Integration**: Expanded beyond road networks to include ports, airports, and major freight corridors
+- **Standardized Assessment**: Comparable metrics across diverse urban contexts
+- **Policy Support**: Evidence-based data for national urban development strategies  
+- **Capacity Building**: Technical methodology transfer to local planning institutions
+- **Regional Coordination**: Cross-jurisdictional analysis supporting metropolitan governance
 
-**Methodological Extensions:**
-- **Strategic Node Identification**: Key logistics hubs, border crossings, economic centers, and infrastructure bottlenecks
-- **Regional Connectivity Analysis**: Inter-city and cross-border transportation efficiency assessment
-- **Investment Prioritization**: Travel time improvements translated into economic development potential
-- **Policy Integration**: Alignment with national transportation master plans and regional development strategies
+---
 
-This application validates the framework's **adaptability from neighborhood-scale urban analysis to national-scale strategic planning**, demonstrating its value for both detailed city planning and macro-economic transportation investment decisions.
+## Project Architecture and Implementation
 
+**Technical Specifications:**
+- **Satellite Data**: Landsat 5 imagery (30m² pixel resolution)
+- **Temporal Scope**: 1990, 2000, 2010 comparative analysis
+- **Geographic Coverage**: 31 jurisdictions across 6,133 km²
+- **Processing Framework**: Advanced GIS analysis with contextual classification
+- **Validation Methods**: Dr. Angel Shlomo's international methodology
 
+**Data Sources and Integration:**
+- **CIPUV Satellite Archive**: Comprehensive municipal imagery database
+- **INDEC Statistical Data**: National census and demographic information  
+- **World Bank Geographic Data**: Regional development context
+- **Lincoln Institute Resources**: Academic validation and methodological support
 
-**Technology Stack:**
-- **R (4.x)** - Statistical computing and geospatial analysis
-- **Key Libraries**: 
-  - Spatial: `rgdal`, `sp`, `sf`, `maptools`, `raster`
-  - Visualization: `ggplot2`, `mapview`, `leaflet`, `tmap`
-  - Data: `dplyr`, `tidyr`, `tidyverse`
-  - API Integration: `XML`, `RCurl`
-
-**Data Sources:**
-- Google Distance Matrix API (historical data collection)
-- TomTom Routing API (updated implementation)
-- European Urban Morphological Zones (EEA)
-- National grid systems (ETRS89 LAEA for Portugal, local projections for others)
+**Deliverables:**
+- **Quantitative Growth Metrics**: Built-up area expansion measurements
+- **Development Pattern Analysis**: Infill, extension, and leapfrog classification
+- **Environmental Impact Assessment**: Green space and rural land conversion analysis
+- **Zonal Comparative Analysis**: Metropolitan ring development comparison
+- **Policy Recommendations**: Evidence-based territorial planning guidance
 
 ---
 
 ## Future Directions
 
-### Real-Time Congestion Monitoring
+### Enhanced Temporal Analysis
 
-Extension to continuous monitoring systems using:
-- Streaming API integration
-- Temporal trend analysis (hourly, daily, seasonal patterns)
-- Predictive modeling for congestion forecasting
+Extension to more recent satellite data:
+- **Post-2010 Development**: Analysis incorporating 2020 satellite imagery
+- **Annual Monitoring**: Higher temporal resolution for trend analysis
+- **Climate Change Integration**: Environmental impact assessment expansion
+- **Population Growth Correlation**: Demographic data integration with territorial expansion
 
-### Multi-Modal Analysis
+### Technological Advancement
 
-Expand beyond private vehicles to include:
-- Public transit travel times
-- Bicycle routing and infrastructure
-- Pedestrian accessibility metrics
-- Comparative mode choice implications
+Integration with modern remote sensing capabilities:
+- **High-resolution Imagery**: Sub-meter pixel analysis for detailed urban structure
+- **Multi-spectral Analysis**: Enhanced vegetation and built environment classification
+- **Machine Learning Integration**: Automated classification improvement
+- **Real-time Monitoring**: Dynamic territorial change detection systems
 
-### Environmental Integration
+### Regional Expansion
 
-Link congestion patterns with:
-- Air quality sensor data
-- Noise pollution measurements
-- Carbon emissions estimates
-- Urban heat island effects
+Methodological application across Latin America:
+- **Multi-national Studies**: Comparative metropolitan analysis across countries
+- **Border Region Analysis**: Cross-boundary territorial development assessment
+- **Urban Network Analysis**: Inter-city connectivity and regional development patterns
+- **Climate Adaptation Planning**: Territorial resilience assessment integration
 
 ---
 
-**Research Approach**: Geospatial analytics • API-driven data collection • Reproducible science
-**Technologies**: R • Spatial analysis • Interactive visualization • Statistical modeling
-**Project Status**: Research outputs published | Methodology documented | Code available
+**Research Approach**: Satellite remote sensing • Multi-temporal analysis • International collaboration
+**Technologies**: Landsat imagery • GIS analysis • Contextual classification • Statistical modeling  
+**Project Status**: Methodology established | Multi-municipal implementation | Ongoing expansion
 
-**Interested in urban analytics, transportation research, or geospatial data science?** This project demonstrates how open-source tools and API integration can produce high-quality research insights for evidence-based urban planning.
+**Interested in satellite-based territorial analysis, metropolitan planning, or international development research?** This project demonstrates how remote sensing technology and international collaboration can produce comprehensive territorial intelligence for sustainable urban development.
