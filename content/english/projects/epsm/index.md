@@ -1,7 +1,7 @@
 ---
-title: "Energy Plus Simulation Manager (EPSM)"
+title: "Parametric Design Tool (PDT)"
 date: 2025-09-14
-image: "EPSM_hero.png"
+image: "sun_hero.png"
 description: "How NODAL developed a custom simulation platform to help researchers at Chalmers University of Technology analyse building energy performance at scale"
 category: "Research Tools"
 ---
