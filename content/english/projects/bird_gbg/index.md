@@ -49,7 +49,7 @@ The platform leverages R and Shiny framework to create an interactive web applic
 
 #### System Architecture
 
-```
+```text
         ┌───────────────────────────────────────────────────────────────────────────┐
         │                              DATA SOURCES                                 │
         ├─────────────────┬─────────────────┬─────────────────┬─────────────────────┤
