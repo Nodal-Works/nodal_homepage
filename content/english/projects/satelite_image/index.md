@@ -1,18 +1,20 @@
 ---
-title: "Mapping the Spatial Distribution of Urban Traffic Congestion"
+title: "Growth of the Metropolitan Region of Buenos Aires through Satellite Image Analysis"
 date: 2020-05-10
-image: "traffic_hero.png"
-description: "A geospatial analysis framework for quantifying and visualizing intra-urban traffic congestion patterns across European cities using Google Distance Matrix API and spatial analytics"
-category: "Urban Analytics & Transportation Research"
+image: "satellite_hero.png"
+description: "A comprehensive territorial analysis using satellite imagery and GIS to quantify urban expansion patterns in the Buenos Aires Metropolitan Region from 1990-2010"
+category: "Urban Analytics & Satellite Remote Sensing"
 ---
 
 ## The Challenge
 
-Urban traffic congestion represents one of the most persistent challenges facing modern cities, with profound impacts on economic productivity, environmental sustainability, and quality of life. While traditional congestion metrics provide city-wide or corridor-level assessments, they fail to capture the fine-grained spatial heterogeneity of congestion within urban areas. Policy makers and urban planners require detailed spatial intelligence to identify congestion hotspots, understand their distribution patterns, and design targeted interventions.
+Understanding urban growth patterns is fundamental for sustainable metropolitan development, yet traditional analysis methods often lack the temporal depth and spatial precision needed for comprehensive territorial planning. The rapid expansion of Latin American cities presents unique challenges for urban planners who require detailed quantitative data on development patterns, green space preservation, and infrastructure demands.
 
-Existing congestion studies predominantly rely on aggregated indicators or limited sensor coverage, providing insufficient spatial granularity for neighborhood-scale analysis. The fundamental research questions driving this investigation were: **How does traffic congestion vary spatially within European cities? Can we develop a systematic methodology to map intra-urban congestion patterns? What insights emerge from comparing congestion distributions across different urban contexts?**
+The **Metropolitan Region of Buenos Aires (RMBA)** exemplifies these challenges as one of South America's largest urban agglomerations. With over **13 million inhabitants** spread across **42 municipalities**, understanding its growth dynamics requires sophisticated analytical approaches that can capture both the scale and complexity of metropolitan expansion.
 
-This research addresses these gaps by developing a comprehensive geospatial framework for measuring, analyzing, and visualizing traffic congestion at unprecedented spatial resolution across four European cities: **Lisbon**, **Göteborg**, **Amsterdam**, and **Glasgow**.
+The fundamental research questions driving this investigation were: **How has urban development evolved spatially in the Buenos Aires Metropolitan Region? What patterns of growth—infill, extension, or leapfrog development—have characterized different metropolitan zones? How have green spaces and rural lands been affected by urban expansion between 1990 and 2010?**
+
+This research addresses these gaps through a comprehensive satellite imagery analysis framework, providing quantitative insights into **20 years of metropolitan growth** using advanced **Geographic Information Systems (GIS)** and **remote sensing methodologies**.
 
 ---
 
