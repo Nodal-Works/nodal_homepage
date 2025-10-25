@@ -1,6 +1,6 @@
 ---
 title: "Growth of the Metropolitan Region of Buenos Aires through Satellite Image Analysis"
-date: 2020-07-10
+date: 2015-07-01
 image: "satelite_hero.png"
 description: "A comprehensive territorial analysis using satellite imagery and GIS to quantify urban expansion patterns in the Buenos Aires Metropolitan Region from 1990-2010"
 category: "Urban Analytics & Satellite Remote Sensing"
