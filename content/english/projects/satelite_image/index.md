@@ -70,7 +70,7 @@ The second phase applies sophisticated contextual analysis to refine the initial
 - **Rural open spaces**: Less than 10% of neighboring pixels are built-up
 
 <div style="text-align: center;">
-<img src="figure1_contextual.png" width="80%" alt="Contextual reclassification methodology diagram" style="display: block; margin: 0 auto;">
+<img src="satelite_hero.png" width="80%" alt="Contextual reclassification methodology diagram" style="display: block; margin: 0 auto;">
 <p><em>Figure 3: Phase 2 contextual reclassification based on neighborhood analysis</em></p>
 </div>
 
@@ -123,11 +123,38 @@ The satellite imagery analysis revealed dramatic urban expansion across the Buen
 
 **Overall Growth Metrics:**
 
-| Year | Built-up Area (km²) | % of Total Region | Growth Rate |
-|------|---------------------|-------------------|-------------|
-| 1990 | 1,070               | 17%               | —           |
-| 2000 | 1,237               | 20%               | +16%        |
-| 2010 | 1,712               | 28%               | +38%        |
+<div style="overflow-x: auto; margin: 2rem 0;">
+<table style="width: 100%; border-collapse: collapse; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+  <thead style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+    <tr>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Year</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Built-up Area (km²)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">% of Total Region</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Growth Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">1990</td>
+      <td style="padding: 12px; text-align: center; border: none;">1,070</td>
+      <td style="padding: 12px; text-align: center; border: none;">17%</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #6c757d;">—</td>
+    </tr>
+    <tr style="background-color: white;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">2000</td>
+      <td style="padding: 12px; text-align: center; border: none;">1,237</td>
+      <td style="padding: 12px; text-align: center; border: none;">20%</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #28a745; font-weight: 600;">+16%</td>
+    </tr>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">2010</td>
+      <td style="padding: 12px; text-align: center; border: none;">1,712</td>
+      <td style="padding: 12px; text-align: center; border: none;">28%</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #28a745; font-weight: 600;">+38%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 Between 1990 and 2010, the **urbanized area increased by 60%**, while rural undeveloped land decreased from **4,847 km² to 4,137 km²**—a loss of **710 km² of rural territory** to urban development.
 
@@ -142,11 +169,38 @@ The analysis identified three distinct **development patterns** characterizing m
 
 **Development Type Distribution:**
 
-| Year | Urban (%) | Suburban (%) | Rural (%) |
-|------|-----------|--------------|-----------|
-| 1990 | 83        | 15           | 1         |
-| 2000 | 85        | 14           | 1         |
-| 2010 | 85        | 13           | 1         |
+<div style="overflow-x: auto; margin: 2rem 0;">
+<table style="width: 100%; border-collapse: collapse; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+  <thead style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white;">
+    <tr>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Year</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Urban (%)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Suburban (%)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Rural (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">1990</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e3f2fd; font-weight: 600;">83</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #fff3e0; font-weight: 600;">15</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8; font-weight: 600;">1</td>
+    </tr>
+    <tr style="background-color: white;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">2000</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e3f2fd; font-weight: 600;">85</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #fff3e0; font-weight: 600;">14</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8; font-weight: 600;">1</td>
+    </tr>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">2010</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e3f2fd; font-weight: 600;">85</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #fff3e0; font-weight: 600;">13</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8; font-weight: 600;">1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 **Urban development** consistently dominated, representing over **80% of all built-up areas** throughout the study period, indicating **compact development patterns** rather than dispersed suburban sprawl.
 
@@ -156,11 +210,38 @@ Urban expansion significantly affected **green spaces and environmental resource
 
 **Urban Green Space Evolution:**
 
-| Year | Green Spaces (km²) | % of Built-up Area | Change |
-|------|--------------------|--------------------|--------|
-| 1990 | 202                | 19%                | —      |
-| 2000 | 225                | 18%                | +11%   |
-| 2010 | 260                | 15%                | +16%   |
+<div style="overflow-x: auto; margin: 2rem 0;">
+<table style="width: 100%; border-collapse: collapse; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+  <thead style="background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%); color: white;">
+    <tr>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Year</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Green Spaces (km²)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">% of Built-up Area</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">1990</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8;">202</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #c8e6c9; font-weight: 600;">19%</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #6c757d;">—</td>
+    </tr>
+    <tr style="background-color: white;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">2000</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8;">225</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #ffeb3b; font-weight: 600; color: #333;">18%</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #28a745; font-weight: 600;">+11%</td>
+    </tr>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 500;">2010</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8;">260</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #ffcdd2; font-weight: 600;">15%</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #28a745; font-weight: 600;">+16%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 While total green space area increased by **58 km²**, the **proportional coverage declined from 19% to 15%** of built-up areas, indicating that **urban densification outpaced green space preservation**.
 
@@ -181,12 +262,44 @@ The analysis revealed **distinct growth patterns** across different metropolitan
 
 **Zonal Development Distribution:**
 
-| Metropolitan Zone | Total Surface (km²) | % of RMBA Total | Primary Characteristics |
-|-------------------|---------------------|-----------------|-------------------------|
-| **CABA**          | 204                 | 3%              | Central core, limited expansion |
-| **1st Ring**      | 759                 | 12%             | Highly consolidated, mature development |
-| **2nd Ring**      | 1,806               | 29%             | Rapid growth, suburban expansion |
-| **3rd Ring**      | 3,365               | 55%             | Emerging development, highest growth rates |
+<div style="overflow-x: auto; margin: 2rem 0;">
+<table style="width: 100%; border-collapse: collapse; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+  <thead style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+    <tr>
+      <th style="padding: 15px; text-align: left; font-weight: 600; border: none;">Metropolitan Zone</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Total Surface (km²)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">% of RMBA Total</th>
+      <th style="padding: 15px; text-align: left; font-weight: 600; border: none;">Primary Characteristics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: left; border: none; font-weight: 600; color: #dc3545;">CABA</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #ffebee;">204</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #ffebee; font-weight: 600;">3%</td>
+      <td style="padding: 12px; text-align: left; border: none; font-style: italic;">Central core, limited expansion</td>
+    </tr>
+    <tr style="background-color: white;">
+      <td style="padding: 12px; text-align: left; border: none; font-weight: 600; color: #ff9800;">1st Ring</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #fff3e0;">759</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #fff3e0; font-weight: 600;">12%</td>
+      <td style="padding: 12px; text-align: left; border: none; font-style: italic;">Highly consolidated, mature development</td>
+    </tr>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: left; border: none; font-weight: 600; color: #2196f3;">2nd Ring</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e3f2fd;">1,806</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e3f2fd; font-weight: 600;">29%</td>
+      <td style="padding: 12px; text-align: left; border: none; font-style: italic;">Rapid growth, suburban expansion</td>
+    </tr>
+    <tr style="background-color: white;">
+      <td style="padding: 12px; text-align: left; border: none; font-weight: 600; color: #4caf50;">3rd Ring</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8;">3,365</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8; font-weight: 600;">55%</td>
+      <td style="padding: 12px; text-align: left; border: none; font-style: italic;">Emerging development, highest growth rates</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 **Key Zonal Findings:**
 
@@ -206,10 +319,38 @@ Analysis of **new development between decades** revealed evolving urban expansio
 
 **New Development Analysis:**
 
-| Period     | New Surface (km²) | Growth Rate | Infill (%) | Extension (%) | Leapfrog (%) |
-|------------|------------------|-------------|------------|---------------|--------------|
-| 1990–2000  | 167              | —           | 34         | 60            | 6            |
-| 2000–2010  | 478              | +187%       | 30         | 53            | 17           |
+<div style="overflow-x: auto; margin: 2rem 0;">
+<table style="width: 100%; border-collapse: collapse; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+  <thead style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white;">
+    <tr>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Period</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">New Surface (km²)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Growth Rate</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Infill (%)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Extension (%)</th>
+      <th style="padding: 15px; text-align: center; font-weight: 600; border: none;">Leapfrog (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f8f9fa;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 600;">1990–2000</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e3f2fd;">167</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #6c757d;">—</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #fff3e0; font-weight: 600;">34</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8; font-weight: 600;">60</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #ffebee; font-weight: 600;">6</td>
+    </tr>
+    <tr style="background-color: white;">
+      <td style="padding: 12px; text-align: center; border: none; font-weight: 600;">2000–2010</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e3f2fd; font-weight: 600;">478</td>
+      <td style="padding: 12px; text-align: center; border: none; color: #28a745; font-weight: 600;">+187%</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #fff3e0; font-weight: 600;">30</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #e8f5e8; font-weight: 600;">53</td>
+      <td style="padding: 12px; text-align: center; border: none; background-color: #ffcdd2; font-weight: 600; color: #d32f2f;">17</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 **Development Pattern Evolution:**
 - **Extension development** (contiguous growth) dominated both periods but decreased from 60% to 53%
