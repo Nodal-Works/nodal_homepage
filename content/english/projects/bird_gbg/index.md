@@ -204,3 +204,4 @@ This project establishes a replicable framework for translating scientific resea
 **Project Status**: Open source | Production deployment | Active development
 
 **Interested in developing interactive educational platforms or transforming research data into engaging public tools?** Contact NODAL to explore how we can create custom solutions that bridge scientific rigor with accessible user experiences.
+
