@@ -3,11 +3,11 @@
 languageName = "En"
 languageCode = "en-us"
 contentDir = "content/english"
-weight = 1
+weight = 2
 
 ################ Swedish language ##################
 [sv]
 languageName = "Sv"
 languageCode = "sv"
 contentDir = "content/swedish"
-weight = 2
+weight = 1
