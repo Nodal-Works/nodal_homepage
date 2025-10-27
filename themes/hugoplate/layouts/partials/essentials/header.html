@@ -122,8 +122,10 @@
         {{ end }}
       {{ end }}
 
-      {{ partial "components/language-switcher" (dict "Context" . "Class" "mr-5 pl-2 py-1 dark:bg-darkmode-light rounded") }}
-      {{ partial "components/theme-switcher" (dict "Class" "mr-5") }}
+      <div class="flex items-center space-x-3">
+        {{ partial "components/language-switcher" (dict "Context" . "Class" "rounded") }}
+        {{ partial "components/theme-switcher" (dict "Class" "") }}
+      </div>
 
 
       <!-- navigation btn -->
