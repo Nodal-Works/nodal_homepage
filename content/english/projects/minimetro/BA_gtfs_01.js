@@ -19,7 +19,7 @@ let city = "BA";
 //let cfg = cityConfigs[city];
 let cfg ;
 // zoom/pan vars
-let zoom = 2;
+let zoom = 1;
 let offsetX = 0, offsetY = 0;
 let dragging = false;
 let lastX, lastY;
@@ -345,8 +345,16 @@ function drawVagons() {
 
 // ========== INTERACTIVITY ==========
 function mouseWheel(event) {
-  zoom *= (event.delta > 0) ? 0.9 : 1.1;
-  return false;
+  // Only handle zoom if mouse is over the canvas AND user is holding a modifier key
+  // This prevents interference with normal page scrolling
+  if (keyIsPressed && (keyCode === CONTROL || keyCode === ALT)) {
+    zoom *= (event.delta > 0) ? 0.9 : 1.1;
+    zoom = constrain(zoom, 0.5, 5.0); // Limit zoom range
+    return false; // Prevent default scrolling
+  }
+  
+  // Allow normal page scrolling when no modifier key is pressed
+  return true;
 }
 
 function mousePressed() {
