@@ -1,0 +1,23 @@
+############# Swedish navigation ##############
+
+# main menu
+[[main]]
+name = "Tjänster"
+url = "/services"
+weight = 2
+[[main]]
+name = "Projekt"
+url = "/english/projects/"
+weight = 3
+
+[[main]]
+name = "Team"
+url = "/authors"
+weight = 5
+[[main]]
+name = "Blogg"
+url = "/english/blog/"
+weight = 6
+
+# footer menu
+# (no footer links)
