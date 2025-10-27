@@ -19,7 +19,7 @@ let city = "BA";
 //let cfg = cityConfigs[city];
 let cfg ;
 // zoom/pan vars
-let zoom = 1;
+let zoom = 2;
 let offsetX = 0, offsetY = 0;
 let dragging = false;
 let lastX, lastY;
@@ -94,7 +94,8 @@ function setup() {
 
 // ========== DRAW LOOP ==========
 function draw() {
-  background(240);
+  // Use transparent background instead of gray
+  clear();
 
   // Draw title
   noStroke();
