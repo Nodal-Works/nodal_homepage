@@ -568,7 +568,7 @@ img[src*="service-"] {
 
 /* Links - ensure visible in dark mode */
 .dark a:not([class*="btn"]):not(.nav-link) {
-    color: #6dd5ff !important;
+    color: #3e3e3e !important;
 }
 
 .dark a:hover:not([class*="btn"]):not(.nav-link) {
@@ -598,8 +598,8 @@ img[src*="service-"] {
 
 /* Code inline */
 .dark code:not([class*="language"]) {
-    background-color: #2c2c2c !important;
-    color: #a0e8ff !important;
+    background-color: #555 !important;
+    color: #555 !important;
 }
 
 /* Lists */

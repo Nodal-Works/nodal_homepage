@@ -1,3 +1,4 @@
+---
 title: "Möt teamet"
 
 # Vision Section
@@ -9,3 +10,4 @@ title: "Möt teamet"
 #    - "Evidence-based urban planning"
 #    - "Equitable and sustainable policies"
 #    - "Tangible improvements in residents' daily lives"
+---

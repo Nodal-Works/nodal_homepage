@@ -3,20 +3,20 @@
 # main menu
 [[main]]
 name = "Tjänster"
-url = "/nodal_homepage/services/"
+url = "services/"
 weight = 2
 [[main]]
 name = "Projekt"
-url = "/nodal_homepage/projects/"
+url = "projects/"
 weight = 3
 
 [[main]]
 name = "Team"
-url = "/nodal_homepage/authors/"
+url = "authors/"
 weight = 5
 [[main]]
 name = "Blogg"
-url = "/nodal_homepage/blog/"
+url = "/"
 weight = 6
 
 # footer menu
