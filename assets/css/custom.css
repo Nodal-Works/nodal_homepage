@@ -547,7 +547,7 @@ img[src*="service-"] {
 }
 
 .dark a:hover:not([class*="btn"]):not(.nav-link) {
-    color: #a0e8ff !important;
+    color: #797979 !important;
 }
 
 /* Inputs and textareas */
