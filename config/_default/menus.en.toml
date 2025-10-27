@@ -3,22 +3,22 @@
 # main menu
 [[main]]
 name = "Services"
-url = "/services"
+url = "/nodal_homepage/services/"
 weight = 2
 
 [[main]]
 name = "Projects"
-url = "/projects/"
+url = "/nodal_homepage/projects/"
 weight = 3
 
 [[main]]
 name = "Team"
-url = "/authors"
+url = "/nodal_homepage/authors/"
 weight = 5
 
 [[main]]
 name = "Blog"
-url = "/"
+url = "/nodal_homepage/blog/"
 weight = 6
 
 
