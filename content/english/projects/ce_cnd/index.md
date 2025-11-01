@@ -82,7 +82,10 @@ This metric caps at 100% to represent realistic upper bounds, providing transpar
 We developed a comprehensive **Interactive Circular Economy Assessment Platform** that transforms urban building data into actionable sustainability insights:
 
 <div style="text-align: center;">
-<img src="ce.gif" width="90%" alt="Interactive demonstration of the circular economy assessment application" style="display: block; margin: 0 auto;">
+<video width="90%" controls autoplay muted loop style="display: block; margin: 0 auto;">
+  <source src="ce_.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 <p><em>Interactive Application Demo: Real-time circular economy potential assessment with spatial visualization and temporal analysis</em></p>
 </div>
 
