@@ -13,23 +13,20 @@
   {{ $pageTranslations.Set .Language.Lang .Permalink }}
 {{ end }}
 
-<select class="{{ $class }}" onchange="location = this.value">
+<div class="flex space-x-2">
   {{ range site.Languages }}
-    {{/* Fill the dropdown with all known languages */}}
     {{ $link := $pageTranslations.Get .Lang }}
     {{ if $link }}
-      <option
-        id="{{ .Lang }}"
-        value="{{ $link }}"
-      {{ if eq .Lang $pageLang }}
-        selected
-      {{ end }}
-        >
+      <a href="{{ $link }}"
+         class="px-4 py-1 rounded-full border font-semibold shadow-sm transition-colors duration-200
+         {{ if eq .Lang $pageLang }}
+           bg-gray-300 text-gray-900 border-gray-400
+         {{ else }}
+           bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200 hover:text-black
+         {{ end }}">
         {{ .LanguageName }}
-      </option>
-    {{ else }}
-      {{/* if we can't safely redirect the user to the translated page or at least to translated home, discard the language from options */}}
+      </a>
     {{ end }}
   {{ end }}
-</select>
+</div>
 {{ end }}

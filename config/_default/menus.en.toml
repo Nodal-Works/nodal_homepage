@@ -3,17 +3,17 @@
 # main menu
 [[main]]
 name = "Services"
-url = "/services"
+url = "services/"
 weight = 2
 
 [[main]]
 name = "Projects"
-url = "/projects/"
+url = "projects/"
 weight = 3
 
 [[main]]
 name = "Team"
-url = "/authors"
+url = "authors/"
 weight = 5
 
 [[main]]

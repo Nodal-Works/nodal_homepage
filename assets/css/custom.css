@@ -1,29 +1,4 @@
-/* NODAL logo opening animation: emerge from background */
-.logo-nodal--emerge {
-  /* Quick fade so logo is visible immediately + a longer smooth blur/color reveal */
-  animation: logoEmerge 0.8s cubic-bezier(.4,0,.2,1) 0s both;
-  opacity: 1;
-  filter: blur(1em) brightness(1.15);
-  color: var(--bg);
-  will-change: filter, color;
-}
-
-@keyframes logoFade {
-  /* Removed: logoFade is no longer used for logo-nodal--emerge */
-}
-
-@keyframes logoEmerge {
-  0%   { filter: blur(1em) brightness(1.15); color: var(--bg); }
-  40%  { filter: blur(0.4em) brightness(1.07); color: var(--bg); }
-  70%  { filter: blur(0.15em) brightness(1.02); color: var(--bg); }
-  100% { filter: blur(0) brightness(1); color: var(--text); }
-}
-.logo-nodal--emerge .letter,
-.logo-nodal--emerge .disc,
-.logo-nodal--emerge .ring {
-  /* fade children with the container, then reveal shadows smoothly */
-  animation: logoFade 0.05s ease-out 0.2s both, logoShadow 3.2s ease 0.15s both;
-}
+/* NODAL logo opening animation removed as requested */
 
 @keyframes logoShadow {
   0% {
@@ -568,11 +543,11 @@ img[src*="service-"] {
 
 /* Links - ensure visible in dark mode */
 .dark a:not([class*="btn"]):not(.nav-link) {
-    color: #6dd5ff !important;
+    color: #3e3e3e !important;
 }
 
 .dark a:hover:not([class*="btn"]):not(.nav-link) {
-    color: #a0e8ff !important;
+    color: #797979 !important;
 }
 
 /* Inputs and textareas */
@@ -598,8 +573,8 @@ img[src*="service-"] {
 
 /* Code inline */
 .dark code:not([class*="language"]) {
-    background-color: #2c2c2c !important;
-    color: #a0e8ff !important;
+    background-color: #555 !important;
+    color: #555 !important;
 }
 
 /* Lists */

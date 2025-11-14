@@ -19,7 +19,7 @@
         "primary": "#fff",
         "body": "#1c1c1c",
         "border": "#3E3E3E",
-        "light": "#666",
+        "light": "#1c1c1c",
         "dark": "#fff"
       },
       "text_color": {
